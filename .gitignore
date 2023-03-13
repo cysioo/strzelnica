@@ -102,3 +102,25 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Backup files
+*~
+
+# Undo-tree save-files
+*.~undo-tree
+
+#bin
+bin
+obj
+packages
+.vs
+
+*.suo
+*.user
