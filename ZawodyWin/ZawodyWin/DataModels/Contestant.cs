@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ZawodyWin.Models
+namespace ZawodyWin.DataModels
 {
     public class Contestant
     {

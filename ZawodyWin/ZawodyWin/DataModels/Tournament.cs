@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace ZawodyWin.Models
+namespace ZawodyWin.DataModels
 {
+
     public class Tournament
     {
         public int Id { get; set; }

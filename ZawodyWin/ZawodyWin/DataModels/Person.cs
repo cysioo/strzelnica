@@ -1,4 +1,4 @@
-﻿namespace ZawodyWin.Models
+﻿namespace ZawodyWin.DataModels
 {
     public class Person
     {
