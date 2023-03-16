@@ -20,9 +20,12 @@
             <Hyperlink NavigateUri="ContestantList.xaml" >Zawodnicy</Hyperlink>
         </TextBlock>
         <TextBlock Margin="0,0,0,10">
-            <Hyperlink NavigateUri="VenueList.xaml" >Organizatorzy</Hyperlink>
+            <Hyperlink NavigateUri="OrganizerList.xaml" >Organizatorzy</Hyperlink>
         </TextBlock>
         <Button Content="Backup Danych"/>
         <Button Content="Wczytaj Dane"/>
+        <TextBlock Margin="0,0,0,10">
+            <Hyperlink NavigateUri="About.xaml" >Informacje o aplikacji i jej autorze</Hyperlink>
+        </TextBlock>
     </StackPanel>
 </Page>

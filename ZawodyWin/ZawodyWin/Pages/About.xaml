@@ -1,0 +1,45 @@
+﻿<Page x:Class="ZawodyWin.Pages.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZawodyWin.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="About">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+        <TextBlock>
+            O Programie:
+        </TextBlock>
+        <TextBlock>
+            Patrzysz właśnie na aplikację, która powstała w celu ułatwienia buchalterii zawodów strzeleckich.
+            Niniejszy Program powstał w ramach kurtuazji dla klubu strzeleckiego Tarcza w Gdyni
+            (<Hyperlink NavigateUri="http://tarcza-gdynia.pl/" >http://tarcza-gdynia.pl/</Hyperlink>), 
+            którego jestem członkiem i zachęcam do odwiedzin.
+        </TextBlock>
+        <TextBlock>
+            Udostępniam go nieodpłatnie i jeśli komuś za niego zapłaciłeś to ktoś Cię oszukał.
+            Jeśli czujesz wdzięczność to wesprzyj najbliższy dom dziecka albo hospicjum założone przez 
+            ks. Kaczkowskiego w Pucku (<Hyperlink NavigateUri="https://www.facebook.com/puckie.hospicjum/?locale=pl_PL">
+                https://www.facebook.com/puckie.hospicjum/?locale=pl_PL</Hyperlink>).
+        </TextBlock>
+        <TextBlock>
+            O Autorze:
+        </TextBlock>
+        <TextBlock>
+            Nazywam się Krzysztof Pawelczyk. Jestem programistą z wieloletnim doświadczeniem. 
+            W roku 2010 skończyłem studia na Politechnice Gdańskiej z tytułem magistra inżyniera.
+            Pierwsze doświadczenie zawodowe zbierałem jeszcze w trakcie studiów i od tego czasu nieprzerwanie 
+            współpracuję z różnymi firmami przy wytwarzaniu oprogramowania. 
+        </TextBlock>
+        <TextBlock>Kontakt:</TextBlock>
+        <TextBlock Margin="0,0,0,10">
+            Jeśli masz pytanie albo propozycję to możesz się ze mną skontaktować wypełniając formularz na mojej stronie:
+            <Hyperlink NavigateUri="https://softaddict.azurewebsites.net/" >https://softaddict.azurewebsites.net/</Hyperlink>
+            albo pisząc wiadomość na 
+            <Hyperlink NavigateUri="https://www.linkedin.com/in/krzysiek-pawelczyk-52b1a125/">LinkedIn</Hyperlink>.
+        </TextBlock>
+    </StackPanel>
+</Page>
