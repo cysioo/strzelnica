@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ZawodyWin.DataModels;
+﻿using System.Windows.Controls;
 using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.FormControls
@@ -10,18 +8,21 @@ namespace ZawodyWin.FormControls
     /// </summary>
     public partial class TournamentEditor : UserControl
     {
-        public static readonly DependencyProperty TournamentProperty =
-            DependencyProperty.Register("Tournament", typeof(TournamentViewModel), typeof(TournamentEditor), new PropertyMetadata(null));
-
         public TournamentViewModel Tournament
         {
-            get { return (TournamentViewModel)GetValue(TournamentProperty); }
-            set { SetValue(TournamentProperty, value); }
+            get { return (TournamentViewModel)DataContext; }
+            set { DataContext = value; }
         }
 
         public TournamentEditor()
         {
             InitializeComponent();
+            if (Tournament == null)
+            {
+                Tournament = new TournamentViewModel();
+            }
+
+            DataContext = Tournament;
         }
     }
 }
