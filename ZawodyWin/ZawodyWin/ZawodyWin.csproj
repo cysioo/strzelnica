@@ -12,7 +12,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="DB\TournamentDB.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DB\TournamentDB.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="itext7.pdfhtml" Version="4.0.5" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DB\CreateScripts\" />
   </ItemGroup>
 
 </Project>

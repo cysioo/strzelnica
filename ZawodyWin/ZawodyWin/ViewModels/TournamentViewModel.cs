@@ -6,13 +6,13 @@ namespace ZawodyWin.ViewModels
 {
     public class TournamentViewModel : INotifyPropertyChanged
     {
-        private string? _name;
+        private string _name;
         private DateTime? _date;
         private int? _organizerId;
         private string? _place;
         private int? _leadingRefereeId;
 
-        public string? Name
+        public string Name
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged(); }

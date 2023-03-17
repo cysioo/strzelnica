@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.DataModels;
+using ZawodyWin.Repositories;
 using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.Pages
@@ -22,7 +23,9 @@ namespace ZawodyWin.Pages
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var tournament = GetTournamentFromViewModel(tournamentEditor.Tournament);
-            MessageBox.Show(tournament.Name);
+            var repo = new TournamentRepository();
+            var id = repo.Add(tournament);
+            MessageBox.Show(id.ToString());
         }
 
         private Tournament GetTournamentFromViewModel(TournamentViewModel tournament)
