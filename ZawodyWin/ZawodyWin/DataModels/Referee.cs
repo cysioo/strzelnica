@@ -2,10 +2,10 @@
 {
     public class Referee
     {
-        public int Id { get; set; }
-        public int PersonId { get; set; }
+        public long Id { get; set; }
+        public long PersonId { get; set; }
         public string Function { get; set; }
         public int Class { get; set; }
-        public int TournamentId { get; set; }
+        public long TournamentId { get; set; }
     }
 }
