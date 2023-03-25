@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Numerics;
 using System.Runtime.CompilerServices;
+using ZawodyWin.DataModels;
 
 namespace ZawodyWin.ViewModels
 {
@@ -8,9 +10,9 @@ namespace ZawodyWin.ViewModels
     {
         private string _name;
         private DateTime? _date;
-        private int? _organizerId;
+        private long? _organizerId;
         private string? _place;
-        private int? _leadingRefereeId;
+        private long? _leadingRefereeId;
 
         public string Name
         {
@@ -24,7 +26,7 @@ namespace ZawodyWin.ViewModels
             set { _date = value; OnPropertyChanged(); }
         }
 
-        public int? OrganizerId
+        public long? OrganizerId
         {
             get { return _organizerId; }
             set { _organizerId = value; OnPropertyChanged(); }
@@ -36,10 +38,30 @@ namespace ZawodyWin.ViewModels
             set { _place = value; OnPropertyChanged(); }
         }
 
-        public int? LeadingRefereeId
+        public long? LeadingRefereeId
         {
             get { return _leadingRefereeId; }
             set { _leadingRefereeId = value; OnPropertyChanged(); }
+        }
+
+        public Tournament CreateDbModel()
+        {
+            var result = new Tournament();
+            result.Name = Name;
+            result.Place = Place;
+            result.Date = Date;
+            result.LeadingRefereeId = LeadingRefereeId;
+            result.OrganizerId = OrganizerId;
+            return result;
+        }
+
+        public void SetDbModel(Tournament tournament)
+        {
+            _name = tournament.Name;
+            _place = tournament.Place;
+            _date = tournament.Date;
+            _leadingRefereeId = tournament.LeadingRefereeId;
+            _organizerId = tournament.OrganizerId;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

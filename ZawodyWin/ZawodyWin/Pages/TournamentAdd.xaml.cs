@@ -22,21 +22,11 @@ namespace ZawodyWin.Pages
 
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var tournament = GetTournamentFromViewModel(tournamentEditor.Tournament);
+            var tournament = tournamentEditor.Tournament.CreateDbModel();
             var repo = new TournamentRepository();
             var id = repo.Add(tournament);
-            MessageBox.Show(id.ToString());
-        }
-
-        private Tournament GetTournamentFromViewModel(TournamentViewModel tournament)
-        {
-            var result = new Tournament();
-            result.Name = tournament.Name;
-            result.Place = tournament.Place;
-            result.Date = tournament.Date;
-            result.LeadingRefereeId = tournament.LeadingRefereeId;
-            result.OrganizerId = tournament.OrganizerId;
-            return result;
+            tournament.Id = id;
+            NavigationService.Navigate(new TournamentEdit(tournament));
         }
     }
 }

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ZawodyWin.DataModels;
+using ZawodyWin.Repositories;
+using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.Pages
 {
@@ -20,9 +11,24 @@ namespace ZawodyWin.Pages
     /// </summary>
     public partial class TournamentEdit : Page
     {
-        public TournamentEdit()
+        private long _tournamentId;
+        private TournamentRepository _tournamentRepository;
+
+        public TournamentEdit(Tournament tournament)
         {
             InitializeComponent();
+            _tournamentRepository = new TournamentRepository();
+            _tournamentId = tournament.Id;
+            tournamentEditor.Tournament = new TournamentViewModel();
+            tournamentEditor.Tournament.SetDbModel(tournament);
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var tournament = tournamentEditor.Tournament.CreateDbModel();
+            tournament.Id = _tournamentId;
+            var updateSucceeded = _tournamentRepository.Update(tournament);
+            if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
         }
     }
 }

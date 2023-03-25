@@ -12,7 +12,7 @@ namespace ZawodyWin.Repositories
         public static SQLiteCommand CreateInsertCommand<T>(T model) where T : class
         {
             var query = new StringBuilder("INSERT INTO ");
-            var parameters = GetInsertCommandParams(model);
+            var parameters = GetNonKeyCommandParams(model);
             var columnString = string.Join(", ", parameters.Select(x => x.ColumnName));
             var valuesString = string.Join(", ", parameters.Select(x => x.ParamName));
             query.Append($"[{model.GetType().Name}] ({columnString}) VALUES ({valuesString});");
@@ -26,11 +26,58 @@ namespace ZawodyWin.Repositories
 
             return command;
         }
+        public static SQLiteCommand CreateUpdateCommand<T>(T model) where T : class
+        {
+            var query = new StringBuilder($"UPDATE {model.GetType().Name} SET ");
+            var parameters = GetNonKeyCommandParams(model);
+            foreach ( var parameter in parameters)
+            {
+                query.Append($"{parameter.ColumnName}={parameter.ParamName},");
+            }
+            query.Remove(query.Length - 1, 1);  // last coma
+            query.Append($" WHERE Id=$id");
 
-        private static IEnumerable<CommandGenerationParam> GetInsertCommandParams<T>(T model) where T : class
+            var command = new SQLiteCommand(query.ToString());
+            foreach (var parameter in parameters)
+            {
+                command.Parameters.AddWithValue(parameter.ParamName, parameter.ParamValue);
+            }
+
+            var idProperty = GetModelProperties<T>().First(x => x.Name == "Id");
+            var id = idProperty.GetValue(model);
+            command.Parameters.AddWithValue("$id", id);
+
+            return command;
+        }
+
+        public static SQLiteCommand CreateGetByIdCommand<T>(long id) where T : class
+        {
+            var modelProperties = GetModelProperties<T>();
+            var columnString = string.Join(", ", modelProperties.Select(x => x.Name));
+            var query = $"SELECT {columnString} FROM {typeof(T).Name} WHERE Id=$id";
+
+            var command = new SQLiteCommand(query.ToString());
+            command.Parameters.AddWithValue("$id", id);
+
+            return command;
+        }
+
+        private static long GetId<T>(T model) where T : class
+        {
+            var idProperty = GetModelProperties<T>().First(x => x.Name == "Id");
+            var result = idProperty.GetValue(model);
+            if (result == null)
+            {
+                throw new InvalidOperationException("Wrong Model - Id doesn't exist");
+            }
+
+            return (long)result;
+        }
+
+        private static IEnumerable<CommandGenerationParam> GetNonKeyCommandParams<T>(T model) where T : class
         {
             var result = new List<CommandGenerationParam>();
-            var modelInsertProperties = GetInsertProperties(model);
+            var modelInsertProperties = GetNonKeyProperties(model);
 
             for (var i = 0; i < modelInsertProperties.Count(); i++)
             {
@@ -44,14 +91,14 @@ namespace ZawodyWin.Repositories
             return result;
         }
 
-        private static IEnumerable<PropertyInfo> GetInsertProperties<T>(T model) where T : class
+        private static IEnumerable<PropertyInfo> GetNonKeyProperties<T>(T model) where T : class
         {
-            return GetDbProperties(model).Where(x => x.Name != "Id");
+            return GetModelProperties<T>().Where(x => x.Name != "Id");
         }
 
-        private static IEnumerable<PropertyInfo> GetDbProperties<T>(T model) where T : class
+        private static IEnumerable<PropertyInfo> GetModelProperties<T>() where T : class
         {
-            return model.GetType().GetProperties();
+            return typeof(T).GetProperties();
         }
     }
 }
