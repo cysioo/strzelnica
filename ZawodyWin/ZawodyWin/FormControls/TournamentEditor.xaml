@@ -24,9 +24,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Id:"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Id, Mode=TwoWay}"/>
-
         <Label Grid.Row="1" Grid.Column="0" Content="Name:"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"/>
 
