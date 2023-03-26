@@ -10,6 +10,10 @@
       Title="TournamentEdit">
 
     <StackPanel Orientation="Vertical">
+        <TextBlock Margin="0,0,0,10">
+            <Hyperlink NavigateUri="HomePage.xaml" >Powrót do strony głównej</Hyperlink>
+        </TextBlock>
+        
         <TextBlock FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20">Edycja zawodów</TextBlock>
         <formcontrols:TournamentEditor x:Name="tournamentEditor"/>
         <Button x:Name="btnSave" Click="btnSave_Click">Zapisz</Button>
