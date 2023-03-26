@@ -18,8 +18,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
                         <TextBlock Text="{Binding Date}" />
+                        <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

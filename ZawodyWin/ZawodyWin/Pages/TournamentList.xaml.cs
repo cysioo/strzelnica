@@ -30,7 +30,7 @@ namespace ZawodyWin.Pages
             InitializeComponent();
             _tournamentRepository = new TournamentRepository();
             var model = new TournamentListViewModel();
-            model.Tournaments = _tournamentRepository.GetAll().OrderByDescending(x => x.Date);
+            model.Tournaments = _tournamentRepository.GetAll().OrderByDescending(x => x.Date ?? DateTime.MaxValue);
             DataContext = model;
         }
 
