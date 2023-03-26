@@ -14,15 +14,19 @@
         </TextBlock>
         
         <TextBlock Text="Lista Zawodów" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        
         <ListView ItemsSource="{Binding Tournaments}" SelectionChanged="OnSelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Date}" />
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+
+                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
+
+                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Data" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="nazwa" Width="400">
+                    </GridViewColumn>
+
+                </GridView>
+
+            </ListView.View>
         </ListView>
     </StackPanel>
 </Page>
