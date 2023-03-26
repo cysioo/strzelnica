@@ -20,7 +20,7 @@
 
                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
 
-                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Data" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Date, StringFormat='yyyy-MM-dd'}" Header="Data" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="nazwa" Width="400">
                     </GridViewColumn>
 
