@@ -1,6 +1,7 @@
 ﻿//using Microsoft.Data.Sqlite;
 //using SQLite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Reflection;
@@ -55,41 +56,87 @@ namespace ZawodyWin.Repositories
                 var command = CommandFactory.CreateGetByIdCommand<Tournament>(id);
                 command.Connection = connection;
 
-                using SQLiteDataReader rdr = command.ExecuteReader();
-                var modelProperties = typeof(Tournament).GetProperties();
-                if (rdr.Read())
+                using SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.Read())
                 {
-                    Tournament result = new Tournament();
-                    for (var i = 0; i < modelProperties.Length; i++)
-                    {
-                        var property = modelProperties[i];
-                        object? columnValue = null;
-
-                        if (property.PropertyType == typeof(string))
-                        {
-                            columnValue = rdr.GetString(i);
-                        }
-                        else if (property.PropertyType == typeof(long))
-                        {
-                            columnValue = rdr.GetInt64(i);
-                        }
-                        else if (property.PropertyType == typeof(DateTime))
-                        {
-                            columnValue = rdr.GetDateTime(i);
-                        }
-                        else if (property.PropertyType == typeof(bool))
-                        {
-                            columnValue = rdr.GetBoolean(i);
-                        }
-
-                        modelProperties[i].SetValue(result, columnValue);
-                    }
-
-                    return result;
+                    return GetTournament(reader);
                 }
 
                 return null;
             }
+        }
+
+        public IEnumerable<Tournament> GetAll()
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var command = CommandFactory.CreateGetAllCommand<Tournament>();
+                command.Connection = connection;
+
+                using SQLiteDataReader reader = command.ExecuteReader();
+                var result = new List<Tournament>();
+                while (reader.Read())
+                {
+                    result.Add(GetTournament(reader));
+                }
+
+                return result;
+            }
+        }
+
+        private static Tournament GetTournament(SQLiteDataReader reader)
+        {
+            var modelProperties = typeof(Tournament).GetProperties();
+            Tournament result = new Tournament();
+            for (var i = 0; i < modelProperties.Length; i++)
+            {
+                var property = modelProperties[i];
+                object? columnValue = GetColumnValueFromReader(reader, property);
+
+                modelProperties[i].SetValue(result, columnValue);
+            }
+
+            return result;
+        }
+
+        private static object? GetColumnValueFromReader(SQLiteDataReader reader, PropertyInfo property)
+        {
+            //return reader.GetValue(property.Name);
+
+            if (reader.IsDBNull(property.Name))
+            {
+                return null;
+            }
+
+            object? columnValue = null;
+            if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
+            {
+                columnValue = reader.GetDateTime(property.Name);
+            }
+            else
+            {
+                columnValue = reader.GetValue(property.Name);
+            }
+
+            //if (property.PropertyType == typeof(string))
+            //{
+            //    columnValue = reader.GetString(property.Name);
+            //}
+            //else if (property.PropertyType == typeof(long))
+            //{
+            //    columnValue = reader.GetInt64(property.Name);
+            //}
+            //else if (property.PropertyType == typeof(DateTime))
+            //{
+            //    columnValue = reader.GetDateTime(property.Name);
+            //}
+            //else if (property.PropertyType == typeof(bool))
+            //{
+            //    columnValue = reader.GetBoolean(property.Name);
+            //}
+
+            return columnValue;
         }
     }
 }

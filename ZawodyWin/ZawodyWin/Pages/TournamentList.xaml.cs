@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZawodyWin.DataModels;
+using ZawodyWin.Repositories;
+using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.Pages
 {
@@ -20,9 +23,29 @@ namespace ZawodyWin.Pages
     /// </summary>
     public partial class TournamentList : Page
     {
+        private TournamentRepository _tournamentRepository;
+
         public TournamentList()
         {
             InitializeComponent();
+            _tournamentRepository = new TournamentRepository();
+            var model = new TournamentListViewModel();
+            model.Tournaments = _tournamentRepository.GetAll().OrderByDescending(x => x.Date);
+            DataContext = model;
         }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                // Get the selected item and navigate to the edit page
+                var selectedItem = e.AddedItems[0] as Tournament;
+                if (selectedItem != null)
+                {
+                    NavigationService.Navigate(new TournamentEdit(selectedItem));
+                }
+            }
+        }
+
     }
 }

@@ -62,6 +62,17 @@ namespace ZawodyWin.Repositories
             return command;
         }
 
+        public static SQLiteCommand CreateGetAllCommand<T>() where T : class
+        {
+            var modelProperties = GetModelProperties<T>();
+            var columnString = string.Join(", ", modelProperties.Select(x => x.Name));
+            var query = $"SELECT {columnString} FROM {typeof(T).Name}";
+
+            var command = new SQLiteCommand(query.ToString());
+
+            return command;
+        }
+
         private static long GetId<T>(T model) where T : class
         {
             var idProperty = GetModelProperties<T>().First(x => x.Name == "Id");
