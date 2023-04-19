@@ -1,6 +1,6 @@
 ﻿namespace ZawodyWin.DataModels
 {
-    public class Organization
+    public class Organizer
     {
         public long Id { get; set; }
         public string Name { get; set; }
