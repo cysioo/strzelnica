@@ -20,12 +20,12 @@ namespace ZawodyWin.Pages
             _tournamentRepository = new TournamentRepository();
             _tournamentId = tournament.Id;
             tournamentEditor.Tournament = new TournamentViewModel();
-            tournamentEditor.Tournament.SetDbModel(tournament);
+            tournamentEditor.Tournament.SetFromDbModel(tournament);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var tournament = tournamentEditor.Tournament.CreateDbModel();
+            var tournament = tournamentEditor.Tournament.ToDbModel();
             tournament.Id = _tournamentId;
             var updateSucceeded = _tournamentRepository.Update(tournament);
             if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }

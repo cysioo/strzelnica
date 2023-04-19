@@ -92,51 +92,12 @@ namespace ZawodyWin.Repositories
             for (var i = 0; i < modelProperties.Length; i++)
             {
                 var property = modelProperties[i];
-                object? columnValue = GetColumnValueFromReader(reader, property);
+                object? columnValue = SqlToModelMapper.GetColumnValueFromReader(reader, property);
 
                 modelProperties[i].SetValue(result, columnValue);
             }
 
             return result;
-        }
-
-        private static object? GetColumnValueFromReader(SQLiteDataReader reader, PropertyInfo property)
-        {
-            //return reader.GetValue(property.Name);
-
-            if (reader.IsDBNull(property.Name))
-            {
-                return null;
-            }
-
-            object? columnValue = null;
-            if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
-            {
-                columnValue = reader.GetDateTime(property.Name);
-            }
-            else
-            {
-                columnValue = reader.GetValue(property.Name);
-            }
-
-            //if (property.PropertyType == typeof(string))
-            //{
-            //    columnValue = reader.GetString(property.Name);
-            //}
-            //else if (property.PropertyType == typeof(long))
-            //{
-            //    columnValue = reader.GetInt64(property.Name);
-            //}
-            //else if (property.PropertyType == typeof(DateTime))
-            //{
-            //    columnValue = reader.GetDateTime(property.Name);
-            //}
-            //else if (property.PropertyType == typeof(bool))
-            //{
-            //    columnValue = reader.GetBoolean(property.Name);
-            //}
-
-            return columnValue;
         }
     }
 }

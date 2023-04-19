@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
 
@@ -44,7 +43,7 @@ namespace ZawodyWin.ViewModels
             set { _leadingRefereeId = value; OnPropertyChanged(); }
         }
 
-        public Tournament CreateDbModel()
+        public Tournament ToDbModel()
         {
             var result = new Tournament();
             result.Name = Name;
@@ -55,7 +54,7 @@ namespace ZawodyWin.ViewModels
             return result;
         }
 
-        public void SetDbModel(Tournament tournament)
+        public void SetFromDbModel(Tournament tournament)
         {
             _name = tournament.Name;
             _place = tournament.Place;

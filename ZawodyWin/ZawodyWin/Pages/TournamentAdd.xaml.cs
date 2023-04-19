@@ -22,7 +22,7 @@ namespace ZawodyWin.Pages
 
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var tournament = tournamentEditor.Tournament.CreateDbModel();
+            var tournament = tournamentEditor.Tournament.ToDbModel();
             var repo = new TournamentRepository();
             var id = repo.Add(tournament);
             tournament.Id = id;
