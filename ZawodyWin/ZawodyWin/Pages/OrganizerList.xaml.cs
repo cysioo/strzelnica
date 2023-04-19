@@ -18,9 +18,9 @@ namespace ZawodyWin.Pages
     /// <summary>
     /// Interaction logic for VenueList.xaml
     /// </summary>
-    public partial class VenueList : Page
+    public partial class OrganizerList : Page
     {
-        public VenueList()
+        public OrganizerList()
         {
             InitializeComponent();
         }

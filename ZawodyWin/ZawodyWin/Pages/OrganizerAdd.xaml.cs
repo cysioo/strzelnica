@@ -18,9 +18,9 @@ namespace ZawodyWin.Pages
     /// <summary>
     /// Interaction logic for VenueAdd.xaml
     /// </summary>
-    public partial class VenueAdd : Page
+    public partial class OrganizerAdd : Page
     {
-        public VenueAdd()
+        public OrganizerAdd()
         {
             InitializeComponent();
         }
