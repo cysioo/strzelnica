@@ -3,12 +3,19 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ZawodyWin.Pages"
+      xmlns:local="clr-namespace:ZawodyWin.Pages" xmlns:formcontrols="clr-namespace:ZawodyWin.FormControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="VenueEdit">
 
-    <Grid>
-        
-    </Grid>
+
+    <StackPanel Orientation="Vertical">
+        <TextBlock Margin="0,0,0,10">
+            <Hyperlink NavigateUri="HomePage.xaml" >Powrót do strony głównej</Hyperlink>
+        </TextBlock>
+
+        <TextBlock FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20">Edycja danych organizatora</TextBlock>
+        <formcontrols:OrganizerEditor x:Name="organizerEditor"/>
+        <Button x:Name="btnSave" Click="btnSave_Click">Zapisz</Button>
+    </StackPanel>
 </Page>

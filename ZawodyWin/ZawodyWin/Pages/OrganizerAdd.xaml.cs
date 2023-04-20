@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZawodyWin.FormControls;
+using ZawodyWin.Repositories;
+using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.Pages
 {
@@ -23,6 +26,18 @@ namespace ZawodyWin.Pages
         public OrganizerAdd()
         {
             InitializeComponent();
+
+            var organizer = new OrganizerViewModel();
+            organizerEditor.Organizer = organizer;
+        }
+
+        private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var organizer = organizerEditor.Organizer.ToDbModel();
+            var repo = new OrganizerRepository();
+            var id = repo.Add(organizer);
+            organizer.Id = id;
+            NavigationService.Navigate(new OrganizerEdit(organizer));
         }
     }
 }
