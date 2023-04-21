@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
@@ -30,6 +32,12 @@ namespace ZawodyWin.ViewModels
             get { return _organizerId; }
             set { _organizerId = value; OnPropertyChanged(); }
         }
+
+        public IDictionary<long, string> AvailableOrganizers { get; private set; } = new Dictionary<long, string>(){
+        { 1, "Organizer 1" },
+        { 2, "Organizer 2" },
+        { 3, "Organizer 3" }
+    };
 
         public string? Place
         {

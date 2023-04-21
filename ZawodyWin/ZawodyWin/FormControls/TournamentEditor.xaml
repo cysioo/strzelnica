@@ -31,12 +31,21 @@
         <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Date, Mode=TwoWay}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Organizer Id:"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding OrganizerId, Mode=TwoWay}"/>
 
+        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="organizerComboBox"
+                  ItemsSource="{Binding AvailableOrganizers}"
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  IsEditable="True"
+                  IsTextSearchEnabled="False"
+                  StaysOpenOnEdit="True"
+                  SelectedValue="{Binding OrganizerId, Mode=TwoWay}"/>
+        
         <Label Grid.Row="4" Grid.Column="0" Content="Place:"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Place, Mode=TwoWay}"/>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Leading Referee Id:"/>
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LeadingRefereeId, Mode=TwoWay}"/>
+
     </Grid>
 </UserControl>
