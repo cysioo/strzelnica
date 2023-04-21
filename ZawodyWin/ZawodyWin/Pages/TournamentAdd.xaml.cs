@@ -12,12 +12,17 @@ namespace ZawodyWin.Pages
     /// </summary>
     public partial class TournamentAdd : Page
     {
+        private OrganizerRepository _organizerRepository;
+
         public TournamentAdd()
         {
             InitializeComponent();
 
+            _organizerRepository = new OrganizerRepository();
             var tournament = new TournamentViewModel();
             tournamentEditor.Tournament = tournament;
+            var allOrganizers = _organizerRepository.GetAll();
+            tournamentEditor.Tournament.PopulateOrganizers(allOrganizers);
         }
 
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)

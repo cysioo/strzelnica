@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
+using ZawodyWin.FormControls;
 
 namespace ZawodyWin.ViewModels
 {
@@ -33,11 +34,7 @@ namespace ZawodyWin.ViewModels
             set { _organizerId = value; OnPropertyChanged(); }
         }
 
-        public IDictionary<long, string> AvailableOrganizers { get; private set; } = new Dictionary<long, string>(){
-        { 1, "Organizer 1" },
-        { 2, "Organizer 2" },
-        { 3, "Organizer 3" }
-    };
+        public IDictionary<long, string> AvailableOrganizers { get; private set; } = new Dictionary<long, string>();
 
         public string? Place
         {
@@ -69,6 +66,14 @@ namespace ZawodyWin.ViewModels
             _date = tournament.Date;
             _leadingRefereeId = tournament.LeadingRefereeId;
             _organizerId = tournament.OrganizerId;
+        }
+
+        public void PopulateOrganizers(IEnumerable<Organizer> organizers)
+        {
+            foreach (var organizer in organizers)
+            {
+                AvailableOrganizers[organizer.Id] = organizer.Name;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

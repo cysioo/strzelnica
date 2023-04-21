@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.DataModels;
 using ZawodyWin.Repositories;
@@ -13,14 +14,18 @@ namespace ZawodyWin.Pages
     {
         private long _tournamentId;
         private TournamentRepository _tournamentRepository;
+        private OrganizerRepository _organizerRepository;
 
         public TournamentEdit(Tournament tournament)
         {
             InitializeComponent();
             _tournamentRepository = new TournamentRepository();
+            _organizerRepository = new OrganizerRepository();
             _tournamentId = tournament.Id;
             tournamentEditor.Tournament = new TournamentViewModel();
             tournamentEditor.Tournament.SetFromDbModel(tournament);
+            var allOrganizers = _organizerRepository.GetAll();
+            tournamentEditor.Tournament.PopulateOrganizers(allOrganizers);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
