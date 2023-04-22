@@ -24,13 +24,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Name:"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Tytuł:"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Date:"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Data:"/>
         <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Date, Mode=TwoWay}"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Organizer Id:"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Organizator:"/>
 
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="organizerComboBox"
                   ItemsSource="{Binding AvailableOrganizers}"
@@ -41,11 +41,12 @@
                   StaysOpenOnEdit="True"
                   SelectedValue="{Binding OrganizerId, Mode=TwoWay}"/>
         
-        <Label Grid.Row="4" Grid.Column="0" Content="Place:"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Miejsce:"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Place, Mode=TwoWay}"/>
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Leading Referee Id:"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Sędzia główny:"/>
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LeadingRefereeId, Mode=TwoWay}"/>
 
+        <Label Grid.Row="6" Grid.Column="0" Content="Konkurencje:"/>
     </Grid>
 </UserControl>
