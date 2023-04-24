@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
@@ -15,6 +16,8 @@ namespace ZawodyWin.ViewModels
         private long? _organizerId;
         private string? _place;
         private long? _leadingRefereeId;
+        private ObservableCollection<CompetitionViewModel> _competitions = new ObservableCollection<CompetitionViewModel>();
+        private CompetitionViewModel _selectedCompetition;
 
         public string Name
         {
@@ -40,6 +43,18 @@ namespace ZawodyWin.ViewModels
         {
             get { return _place; }
             set { _place = value; OnPropertyChanged(); }
+        }
+
+        public ObservableCollection<CompetitionViewModel> Competitions
+        {
+            get { return _competitions; }
+            set { _competitions = value; OnPropertyChanged(nameof(Competitions)); }
+        }
+
+        public CompetitionViewModel SelectedCompetition
+        {
+            get { return _selectedCompetition; }
+            set { _selectedCompetition = value; OnPropertyChanged(nameof(SelectedCompetition)); }
         }
 
         public long? LeadingRefereeId
@@ -74,6 +89,16 @@ namespace ZawodyWin.ViewModels
             {
                 AvailableOrganizers[organizer.Id] = organizer.Name;
             }
+        }
+
+        public void AddCompetition(string name, int numRounds)
+        {
+            Competitions.Add(new CompetitionViewModel() { Name = name, NumberOfRounds = numRounds });
+        }
+
+        public void DeleteCompetition(CompetitionViewModel competition)
+        {
+            Competitions.Remove(competition);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -32,8 +32,8 @@
 
         <Label Grid.Row="3" Grid.Column="0" Content="Organizator:"/>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="organizerComboBox"
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0 11 33 44">
+            <ComboBox Grid.Row="3" Grid.Column="1" MinWidth="150" x:Name="organizerComboBox"
                   ItemsSource="{Binding AvailableOrganizers}"
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
@@ -53,5 +53,53 @@
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LeadingRefereeId, Mode=TwoWay}"/>
 
         <Label Grid.Row="6" Grid.Column="0" Content="Konkurencje:"/>
+        <Grid Grid.Row="6" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="newCompetitionNameTextBox" Grid.Column="0" ToolTip="Nazwa konkurencji" Width="Auto" MinWidth="250" Margin="0 0 10 0" HorizontalAlignment="Stretch"/>
+            <TextBox x:Name="newCompetitionNumRoundsTextBox" Grid.Column="1" ToolTip="Liczba serii" Width="100" Margin="0 0 10 0"/>
+            <Button x:Name="addNewCompetitionButton" Grid.Column="2" Content="Dodaj konkurencję" Click="AddNewCompetitionButton_Click" Margin="0 0 10 0" Width="100"/>
+        </Grid>
+        
+        <ListView Grid.Row="7" Grid.Column="1" x:Name="competitionListView" 
+                  ItemsSource="{Binding Competitions}" SelectionMode="Single"
+                  SelectionChanged="CompetitionListView_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Competitions.Count}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" ToolTip="Nazwa konkurencji" Margin="0 0 10 0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding RoundsText}" ToolTip="Liczba serii" Margin="0 0 10 0" FontWeight="Bold"/>
+                        
+                        <Button Grid.Column="2" Content="Usuń" Click="DeleteCompetitionButton_Click"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>
