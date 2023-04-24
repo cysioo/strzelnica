@@ -32,7 +32,8 @@
 
         <Label Grid.Row="3" Grid.Column="0" Content="Organizator:"/>
 
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="organizerComboBox"
+        <StackPanel Grid.Row="3" Grid.Column="1" Width="Auto" Orientation="Horizontal">
+            <ComboBox Grid.Row="3" Grid.Column="1" Width="Auto" x:Name="organizerComboBox"
                   ItemsSource="{Binding AvailableOrganizers}"
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
@@ -40,6 +41,10 @@
                   IsTextSearchEnabled="False"
                   StaysOpenOnEdit="True"
                   SelectedValue="{Binding OrganizerId, Mode=TwoWay}"/>
+            <TextBlock Margin="0,0,0,10">
+                <Hyperlink NavigateUri="OrganizerAdd.xaml" >Dodaj organizatora</Hyperlink>
+            </TextBlock>
+        </StackPanel>
         
         <Label Grid.Row="4" Grid.Column="0" Content="Miejsce:"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Place, Mode=TwoWay}"/>
