@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.ViewModels;
 
@@ -28,31 +29,38 @@ namespace ZawodyWin.FormControls
 
         private void AddNewCompetitionButton_Click(object sender, RoutedEventArgs e)
         {
-            string errorMessage = null;
-            int numRounds;
-            if (string.IsNullOrWhiteSpace(newCompetitionNameTextBox.Text))
+            if (DataContext is TournamentViewModel viewModel)
             {
-                errorMessage = "Podaj nazwę konkurencji\n";
-            }
-            
-            if (string.IsNullOrWhiteSpace(newCompetitionNumRoundsTextBox.Text))
-            {
-                errorMessage += "Podaj liczbę serii w konkurencji";
-            }
-            else if (!int.TryParse(newCompetitionNumRoundsTextBox.Text, out numRounds) || numRounds < 1)
-            {
-                errorMessage += "Liczba serii musi być dodatnią liczbą całkowitą";
-            }
+                string errorMessage = null;
+                int numRounds;
+                if (string.IsNullOrWhiteSpace(newCompetitionNameTextBox.Text))
+                {
+                    errorMessage = "Podaj nazwę konkurencji\n";
+                }
+                else if (viewModel.Competitions.Any(x => x.Name == newCompetitionNameTextBox.Text.Trim()))
+                {
+                    errorMessage = "Ta konkurencja już istnieje\n";
+                }
 
-            if (errorMessage != null)
-            {
-                MessageBox.Show(errorMessage);
-            }
-            else if (DataContext is TournamentViewModel viewModel)
-            {
-                string name = newCompetitionNameTextBox.Text;
-                numRounds = int.Parse(newCompetitionNumRoundsTextBox.Text);
-                viewModel.AddCompetition(name, numRounds);
+                if (string.IsNullOrWhiteSpace(newCompetitionNumRoundsTextBox.Text))
+                {
+                    errorMessage += "Podaj liczbę serii w konkurencji";
+                }
+                else if (!int.TryParse(newCompetitionNumRoundsTextBox.Text, out numRounds) || numRounds < 1)
+                {
+                    errorMessage += "Liczba serii musi być dodatnią liczbą całkowitą";
+                }
+
+                if (errorMessage != null)
+                {
+                    MessageBox.Show(errorMessage, "Błąd przy dodawaniu konkurencji");
+                }
+                else
+                {
+                    string name = newCompetitionNameTextBox.Text.Trim();
+                    numRounds = int.Parse(newCompetitionNumRoundsTextBox.Text);
+                    viewModel.AddCompetition(name, numRounds);
+                }
             }
         }
 
