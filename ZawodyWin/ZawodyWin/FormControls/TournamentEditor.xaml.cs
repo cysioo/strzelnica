@@ -28,10 +28,30 @@ namespace ZawodyWin.FormControls
 
         private void AddNewCompetitionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is TournamentViewModel viewModel)
+            string errorMessage = null;
+            int numRounds;
+            if (string.IsNullOrWhiteSpace(newCompetitionNameTextBox.Text))
+            {
+                errorMessage = "Podaj nazwę konkurencji\n";
+            }
+            
+            if (string.IsNullOrWhiteSpace(newCompetitionNumRoundsTextBox.Text))
+            {
+                errorMessage += "Podaj liczbę serii w konkurencji";
+            }
+            else if (!int.TryParse(newCompetitionNumRoundsTextBox.Text, out numRounds) || numRounds < 1)
+            {
+                errorMessage += "Liczba serii musi być dodatnią liczbą całkowitą";
+            }
+
+            if (errorMessage != null)
+            {
+                MessageBox.Show(errorMessage);
+            }
+            else if (DataContext is TournamentViewModel viewModel)
             {
                 string name = newCompetitionNameTextBox.Text;
-                int numRounds = int.Parse(newCompetitionNumRoundsTextBox.Text);
+                numRounds = int.Parse(newCompetitionNumRoundsTextBox.Text);
                 viewModel.AddCompetition(name, numRounds);
             }
         }
