@@ -5,7 +5,6 @@ using System.Data.SQLite;
 using System.Linq;
 using ZawodyWin.DataModels;
 using ZawodyWin.ViewModels;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ZawodyWin.Repositories
 {
@@ -34,6 +33,7 @@ namespace ZawodyWin.Repositories
                 else
                 {
                     competition = model.ToDbModel();
+                    competition.TournamentId = tournamentId;
                     competitionsToInsert.Add(competition);
                 }
             }

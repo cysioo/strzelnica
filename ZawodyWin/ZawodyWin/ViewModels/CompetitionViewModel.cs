@@ -7,7 +7,7 @@ namespace ZawodyWin.ViewModels
     {
         public string Name { get; set; }
         public long NumberOfRounds { get; set; }
-        public string RoundsText => NumberOfRounds == 1 ? "1 seria" : $"{NumberOfRounds} serii";
+        public string RoundsText => NumberOfRounds == 1 ? "1 seria" : $"{NumberOfRounds} serie";
         public bool DeleteAllowed { get; set; } = true;
 
         public Competition ToDbModel()
