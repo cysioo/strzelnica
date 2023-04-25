@@ -91,7 +91,7 @@ namespace ZawodyWin.ViewModels
             }
         }
 
-        public void AddCompetition(string name, int numRounds)
+        public void AddCompetition(string name, long numRounds)
         {
             Competitions.Add(new CompetitionViewModel() { Name = name, NumberOfRounds = numRounds });
         }
@@ -99,6 +99,22 @@ namespace ZawodyWin.ViewModels
         public void DeleteCompetition(CompetitionViewModel competition)
         {
             Competitions.Remove(competition);
+        }
+
+        public void PopulateCompetitions(IEnumerable<Competition> competitions)
+        {
+            foreach (var competition in competitions)
+            {
+                AddCompetition(competition.Name, competition.NumberOfRounds);
+            }
+        }
+
+        public IEnumerable<Competition> GetDbCompetitions()
+        {
+            foreach (var competition in Competitions)
+            {
+                yield return competition.ToDbModel();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

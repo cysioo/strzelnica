@@ -13,12 +13,17 @@ namespace ZawodyWin.Pages
     public partial class TournamentAdd : Page
     {
         private OrganizerRepository _organizerRepository;
+        private TournamentRepository _tournamentRepository;
+        private CompetitionRepository _competitionRepository;
 
         public TournamentAdd()
         {
             InitializeComponent();
 
             _organizerRepository = new OrganizerRepository();
+            _tournamentRepository = new TournamentRepository();
+            _competitionRepository = new CompetitionRepository();
+
             var tournament = new TournamentViewModel();
             tournamentEditor.Tournament = tournament;
             var allOrganizers = _organizerRepository.GetAll();
@@ -28,9 +33,11 @@ namespace ZawodyWin.Pages
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var tournament = tournamentEditor.Tournament.ToDbModel();
-            var repo = new TournamentRepository();
-            var id = repo.Add(tournament);
+            var id = _tournamentRepository.Add(tournament);
             tournament.Id = id;
+
+            _competitionRepository.SetTournamentCompetitions(id, tournamentEditor.Tournament.Competitions);
+
             NavigationService.Navigate(new TournamentEdit(tournament));
         }
     }

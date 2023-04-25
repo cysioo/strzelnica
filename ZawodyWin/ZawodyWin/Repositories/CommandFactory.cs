@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ZawodyWin.Repositories
 {
@@ -26,6 +27,7 @@ namespace ZawodyWin.Repositories
 
             return command;
         }
+
         public static SQLiteCommand CreateUpdateCommand<T>(T model) where T : class
         {
             var query = new StringBuilder($"UPDATE {model.GetType().Name} SET ");
@@ -52,9 +54,8 @@ namespace ZawodyWin.Repositories
 
         public static SQLiteCommand CreateGetByIdCommand<T>(long id) where T : class
         {
-            var modelProperties = GetModelProperties<T>();
-            var columnString = string.Join(", ", modelProperties.Select(x => x.Name));
-            var query = $"SELECT {columnString} FROM {typeof(T).Name} WHERE Id=$id";
+            var selectQuery = CreateSelectQuery<T>();
+            var query = $"{selectQuery} WHERE Id=$id";
 
             var command = new SQLiteCommand(query.ToString());
             command.Parameters.AddWithValue("$id", id);
@@ -64,13 +65,38 @@ namespace ZawodyWin.Repositories
 
         public static SQLiteCommand CreateGetAllCommand<T>() where T : class
         {
-            var modelProperties = GetModelProperties<T>();
-            var columnString = string.Join(", ", modelProperties.Select(x => x.Name));
-            var query = $"SELECT {columnString} FROM {typeof(T).Name}";
-
+            var query = CreateSelectQuery<T>();
             var command = new SQLiteCommand(query.ToString());
 
             return command;
+        }
+
+        public static string CreateSelectQuery<T>() where T : class
+        {
+            var modelProperties = GetModelProperties<T>();
+            var columnString = string.Join(", ", modelProperties.Select(x => x.Name));
+            return $"SELECT {columnString} FROM {typeof(T).Name}";
+        }
+
+        public static SQLiteCommand CreateFilterCommand<T>(string whereClause, IDictionary<string, object> filterParams) where T : class
+        {
+            var selectQuery = CreateSelectQuery<T>();
+            var query = $"{selectQuery} WHERE {whereClause}";
+
+            var command = new SQLiteCommand(query);
+            foreach (var param in filterParams )
+            {
+                command.Parameters.AddWithValue(param.Key, param.Value);
+            }
+
+            return command;
+        }
+
+        public static SQLiteCommand CreateDeleteCommand(string tableName, IEnumerable<long> idsToDelete)
+        {
+            var joinedIds = string.Join(", ", idsToDelete);
+            var query = $"DELETE FROM {tableName} WHERE Id IN ({joinedIds})";
+            return new SQLiteCommand(query);
         }
 
         private static long GetId<T>(T model) where T : class
