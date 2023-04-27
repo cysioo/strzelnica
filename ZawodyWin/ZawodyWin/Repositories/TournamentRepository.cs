@@ -12,13 +12,12 @@ namespace ZawodyWin.Repositories
 {
     public class TournamentRepository
     {
-        private string _connectionString = "Data Source=DB/TournamentDB.db;";
         public TournamentRepository() { 
         }
 
         public long Add(Tournament tournament)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateInsertCommand(tournament);
@@ -30,7 +29,7 @@ namespace ZawodyWin.Repositories
 
         internal bool Update(Tournament tournament)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateUpdateCommand(tournament);
@@ -50,7 +49,7 @@ namespace ZawodyWin.Repositories
 
         public Tournament? Get(long id)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetByIdCommand<Tournament>(id);
@@ -68,7 +67,7 @@ namespace ZawodyWin.Repositories
 
         public IEnumerable<Tournament> GetAll()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetAllCommand<Tournament>();

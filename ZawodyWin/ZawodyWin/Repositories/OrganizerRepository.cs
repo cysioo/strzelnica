@@ -12,13 +12,12 @@ namespace ZawodyWin.Repositories
 {
     public class OrganizerRepository
     {
-        private string _connectionString = "Data Source=DB/TournamentDB.db;";
         public OrganizerRepository() { 
         }
 
         public long Add(Organizer organizer)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateInsertCommand(organizer);
@@ -30,7 +29,7 @@ namespace ZawodyWin.Repositories
 
         internal bool Update(Organizer organizer)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateUpdateCommand(organizer);
@@ -50,7 +49,7 @@ namespace ZawodyWin.Repositories
 
         public Organizer? Get(long id)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetByIdCommand<Organizer>(id);
@@ -68,7 +67,7 @@ namespace ZawodyWin.Repositories
 
         public IEnumerable<Organizer> GetAll()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetAllCommand<Organizer>();

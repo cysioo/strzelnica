@@ -10,7 +10,6 @@ namespace ZawodyWin.Repositories
 {
     public class CompetitionRepository
     {
-        private string _connectionString = "Data Source=DB/TournamentDB.db;";
         public CompetitionRepository() { 
         }
 
@@ -40,7 +39,7 @@ namespace ZawodyWin.Repositories
 
             var competitionsToDelete = existingCompetitions.Where(x => !competitionModels.Any(m => m.Name.Trim().Equals(x.Name.Trim()))).Select(x => x.Id);
 
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 foreach (var competition in competitionsToInsert)
@@ -68,7 +67,7 @@ namespace ZawodyWin.Repositories
 
         public Competition? Get(long id)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetByIdCommand<Competition>(id);
@@ -85,7 +84,7 @@ namespace ZawodyWin.Repositories
         }
         public IEnumerable<Competition> GetByTournamentId(long tournamentId)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var filterParams = new Dictionary<string, object>();
@@ -106,7 +105,7 @@ namespace ZawodyWin.Repositories
 
         public IEnumerable<Competition> GetAll()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SQLiteConnection(Settings.ConnectionString))
             {
                 connection.Open();
                 var command = CommandFactory.CreateGetAllCommand<Competition>();
