@@ -13,20 +13,23 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Pełna nazwa:"/>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="License:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding License}"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Address Line 1:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding AddressLine1}"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Address Line 2:"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AddressLine2}"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Logo Path:"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding LogoPath}"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Krótka nazwa:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ShortName}"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Licencja:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding License}"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Addres (linia 1):"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AddressLine1}"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Addres (linia 2):"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding AddressLine2}"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Logo Path:"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LogoPath}"/>
     </Grid>
 </UserControl>

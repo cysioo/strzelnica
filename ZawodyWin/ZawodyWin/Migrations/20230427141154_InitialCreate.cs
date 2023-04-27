@@ -33,7 +33,7 @@ namespace ZawodyWin.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    ShortName = table.Column<string>(type: "TEXT", nullable: false),
+                    ShortName = table.Column<string>(type: "TEXT", nullable: true),
                     License = table.Column<string>(type: "TEXT", nullable: true),
                     AddressLine1 = table.Column<string>(type: "TEXT", nullable: true),
                     AddressLine2 = table.Column<string>(type: "TEXT", nullable: true),
