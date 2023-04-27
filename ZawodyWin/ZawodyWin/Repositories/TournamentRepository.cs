@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Markup;
 using ZawodyWin.DataModels;
+using ZawodyWin.DB;
 
 namespace ZawodyWin.Repositories
 {
@@ -17,31 +19,27 @@ namespace ZawodyWin.Repositories
 
         public long Add(Tournament tournament)
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateInsertCommand(tournament);
-                command.Connection = connection;
-                var result = command.ExecuteScalar();
-                return (long)result;
+                context.Tournaments.Add(tournament);
+                context.SaveChanges();
+                return tournament.Id;
             }
         }
 
         internal bool Update(Tournament tournament)
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateUpdateCommand(tournament);
-                command.Connection = connection;
-                var numberOfUpdatedRows = command.ExecuteNonQuery();
+                context.Tournaments.Attach(tournament).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                var numberOfUpdatedRows = context.SaveChanges();
                 if (numberOfUpdatedRows == 0)
                 {
-                    throw new Exception($"No tournament updated (expected to update tournament {tournament.Id}!.");
+                    throw new InvalidOperationException($"No tournament updated (expected to update tournament {tournament.Id}!.");
                 }
                 if (numberOfUpdatedRows > 1)
                 {
-                    throw new Exception($"more then 1 tournament updated (expected to update only tournament {tournament.Id}!.");
+                    throw new InvalidOperationException($"more then 1 tournament updated (expected to update only tournament {tournament.Id}!.");
                 }
                 return numberOfUpdatedRows == 1;
             }
@@ -49,38 +47,17 @@ namespace ZawodyWin.Repositories
 
         public Tournament? Get(long id)
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateGetByIdCommand<Tournament>(id);
-                command.Connection = connection;
-
-                using SQLiteDataReader reader = command.ExecuteReader();
-                if (reader.Read())
-                {
-                    return GetTournament(reader);
-                }
-
-                return null;
+                return context.Tournaments.Find(id);
             }
         }
 
         public IEnumerable<Tournament> GetAll()
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateGetAllCommand<Tournament>();
-                command.Connection = connection;
-
-                using SQLiteDataReader reader = command.ExecuteReader();
-                var result = new List<Tournament>();
-                while (reader.Read())
-                {
-                    result.Add(GetTournament(reader));
-                }
-
-                return result;
+                return context.Tournaments.ToList();
             }
         }
 

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZawodyWin.DataModels
 {
 
+    [Table("Tournament")]
     public class Tournament
     {
         public long Id { get; set; }
