@@ -1,5 +1,8 @@
-﻿namespace ZawodyWin.DataModels
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ZawodyWin.DataModels
 {
+    [Table("Competition")]
     public class Competition
     {
         public long Id { get; set; }

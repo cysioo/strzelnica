@@ -60,20 +60,5 @@ namespace ZawodyWin.Repositories
                 return context.Tournaments.ToList();
             }
         }
-
-        private static Tournament GetTournament(SQLiteDataReader reader)
-        {
-            var modelProperties = typeof(Tournament).GetProperties();
-            Tournament result = new Tournament();
-            for (var i = 0; i < modelProperties.Length; i++)
-            {
-                var property = modelProperties[i];
-                object? columnValue = SqlToModelMapper.GetColumnValueFromReader(reader, property);
-
-                modelProperties[i].SetValue(result, columnValue);
-            }
-
-            return result;
-        }
     }
 }

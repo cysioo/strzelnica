@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using ZawodyWin.DataModels;
+using ZawodyWin.DB;
+using ZawodyWin.Pages;
 using ZawodyWin.ViewModels;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ZawodyWin.Repositories
 {
@@ -37,104 +40,51 @@ namespace ZawodyWin.Repositories
                 }
             }
 
-            var competitionsToDelete = existingCompetitions.Where(x => !competitionModels.Any(m => m.Name.Trim().Equals(x.Name.Trim()))).Select(x => x.Id);
+            var competitionsToDelete = existingCompetitions.Where(x => !competitionModels.Any(m => m.Name.Trim().Equals(x.Name.Trim())));
 
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
                 foreach (var competition in competitionsToInsert)
                 {
-                    var command = CommandFactory.CreateInsertCommand(competition);
-                    command.Connection = connection;
-                    command.ExecuteNonQuery();
+                    context.Competitions.Add(competition);
+                    context.SaveChanges();
                 }
 
                 foreach (var competition in competitionsToUpdate)
                 {
-                    var command = CommandFactory.CreateUpdateCommand(competition);
-                    command.Connection = connection;
-                    command.ExecuteNonQuery();
+                    context.Competitions.Attach(competition).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    var numberOfUpdatedRows = context.SaveChanges();
                 }
 
                 if (competitionsToDelete.Any())
                 {
-                    var command = CommandFactory.CreateDeleteCommand("Competition", competitionsToDelete);
-                    command.Connection = connection;
-                    command.ExecuteNonQuery();
+                    context.Competitions.RemoveRange(competitionsToDelete);
+                    var numberOfUpdatedRows = context.SaveChanges();
                 }
             }
         }
 
         public Competition? Get(long id)
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateGetByIdCommand<Competition>(id);
-                command.Connection = connection;
-
-                using SQLiteDataReader reader = command.ExecuteReader();
-                if (reader.Read())
-                {
-                    return GetCompetition(reader);
-                }
-
-                return null;
+                return context.Competitions.Find(id);
             }
         }
         public IEnumerable<Competition> GetByTournamentId(long tournamentId)
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var filterParams = new Dictionary<string, object>();
-                filterParams["$id"] = tournamentId;
-                var whereClause = "TournamentId=$id";
-                var command = CommandFactory.CreateFilterCommand<Competition>(whereClause, filterParams);
-                command.Connection = connection;
-                using SQLiteDataReader reader = command.ExecuteReader();
-                var result = new List<Competition>();
-                while (reader.Read())
-                {
-                    result.Add(GetCompetition(reader));
-                }
-
-                return result;
+                return context.Competitions.Where(x => x.TournamentId == tournamentId).ToList();
             }
         }
 
         public IEnumerable<Competition> GetAll()
         {
-            using (var connection = new SQLiteConnection(Settings.ConnectionString))
+            using (var context = new DataContext())
             {
-                connection.Open();
-                var command = CommandFactory.CreateGetAllCommand<Competition>();
-                command.Connection = connection;
-
-                using SQLiteDataReader reader = command.ExecuteReader();
-                var result = new List<Competition>();
-                while (reader.Read())
-                {
-                    result.Add(GetCompetition(reader));
-                }
-
-                return result;
+                return context.Competitions.ToList();
             }
-        }
-
-        private static Competition GetCompetition(SQLiteDataReader reader)
-        {
-            var modelProperties = typeof(Competition).GetProperties();
-            Competition result = new Competition();
-            for (var i = 0; i < modelProperties.Length; i++)
-            {
-                var property = modelProperties[i];
-                object? columnValue = SqlToModelMapper.GetColumnValueFromReader(reader, property);
-
-                modelProperties[i].SetValue(result, columnValue);
-            }
-
-            return result;
         }
     }
 }
