@@ -6,52 +6,52 @@ using ZawodyWin.DB;
 
 namespace ZawodyWin.Repositories
 {
-    public class OrganizerRepository
+    public class ShootingClubRepository
     {
-        public OrganizerRepository() { 
+        public ShootingClubRepository() { 
         }
 
-        public long Add(Organizer organizer)
+        public long Add(ShootingClub shootingClub)
         {
             using (var context = new DataContext())
             {
-                context.Organizers.Add(organizer);
+                context.ShootingClubs.Add(shootingClub);
                 context.SaveChanges();
-                return organizer.Id;
+                return shootingClub.Id;
             }
         }
 
-        internal bool Update(Organizer organizer)
+        internal bool Update(ShootingClub shootingClub)
         {
             using (var context = new DataContext())
             {
-                context.Organizers.Attach(organizer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.ShootingClubs.Attach(shootingClub).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 var numberOfUpdatedRows = context.SaveChanges();
                 if (numberOfUpdatedRows == 0)
                 {
-                    throw new InvalidOperationException($"No tournament updated (expected to update tournament {organizer.Id}!.");
+                    throw new InvalidOperationException($"No tournament updated (expected to update tournament {shootingClub.Id}!.");
                 }
                 if (numberOfUpdatedRows > 1)
                 {
-                    throw new InvalidOperationException($"more then 1 tournament updated (expected to update only tournament {organizer.Id}!.");
+                    throw new InvalidOperationException($"more then 1 tournament updated (expected to update only tournament {shootingClub.Id}!.");
                 }
                 return numberOfUpdatedRows == 1;
             }
         }
 
-        public Organizer? Get(long id)
+        public ShootingClub? Get(long id)
         {
             using (var context = new DataContext())
             {
-                return context.Organizers.Find(id);
+                return context.ShootingClubs.Find(id);
             }
         }
 
-        public IEnumerable<Organizer> GetAll()
+        public IEnumerable<ShootingClub> GetAll()
         {
             using (var context = new DataContext())
             {
-                return context.Organizers.ToList();
+                return context.ShootingClubs.ToList();
             }
         }
     }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
 using ZawodyWin.DataModels;
 
 namespace ZawodyWin.DB
@@ -11,7 +9,7 @@ namespace ZawodyWin.DB
         => options.UseSqlite(Settings.ConnectionString);
 
         public DbSet<Tournament> Tournaments { get; set; }
-        public DbSet<Organizer> Organizers { get; set; }
+        public DbSet<ShootingClub> ShootingClubs { get; set; }
         public DbSet<Competition> Competitions { get; set; }
     }
 }

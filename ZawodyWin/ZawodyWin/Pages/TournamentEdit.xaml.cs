@@ -13,20 +13,20 @@ namespace ZawodyWin.Pages
     {
         private long _tournamentId;
         private TournamentRepository _tournamentRepository;
-        private OrganizerRepository _organizerRepository;
+        private ShootingClubRepository _shootingClubRepository;
         private CompetitionRepository _competitionRepository;
 
         public TournamentEdit(Tournament tournament)
         {
             InitializeComponent();
             _tournamentRepository = new TournamentRepository();
-            _organizerRepository = new OrganizerRepository();
+            _shootingClubRepository = new ShootingClubRepository();
             _competitionRepository = new CompetitionRepository();
 
             _tournamentId = tournament.Id;
             tournamentEditor.Tournament = new TournamentViewModel();
             tournamentEditor.Tournament.SetFromDbModel(tournament);
-            var allOrganizers = _organizerRepository.GetAll();
+            var allOrganizers = _shootingClubRepository.GetAll();
             tournamentEditor.Tournament.PopulateOrganizers(allOrganizers);
             var competitions = _competitionRepository.GetByTournamentId(tournament.Id);
             tournamentEditor.Tournament.PopulateCompetitions(competitions);

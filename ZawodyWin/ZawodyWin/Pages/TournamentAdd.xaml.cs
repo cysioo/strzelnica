@@ -12,7 +12,7 @@ namespace ZawodyWin.Pages
     /// </summary>
     public partial class TournamentAdd : Page
     {
-        private OrganizerRepository _organizerRepository;
+        private ShootingClubRepository _shootingClubRepository;
         private TournamentRepository _tournamentRepository;
         private CompetitionRepository _competitionRepository;
 
@@ -20,13 +20,13 @@ namespace ZawodyWin.Pages
         {
             InitializeComponent();
 
-            _organizerRepository = new OrganizerRepository();
+            _shootingClubRepository = new ShootingClubRepository();
             _tournamentRepository = new TournamentRepository();
             _competitionRepository = new CompetitionRepository();
 
             var tournament = new TournamentViewModel();
             tournamentEditor.Tournament = tournament;
-            var allOrganizers = _organizerRepository.GetAll();
+            var allOrganizers = _shootingClubRepository.GetAll();
             tournamentEditor.Tournament.PopulateOrganizers(allOrganizers);
         }
 

@@ -22,26 +22,26 @@ namespace ZawodyWin.Pages
     /// <summary>
     /// Interaction logic for VenueEdit.xaml
     /// </summary>
-    public partial class OrganizerEdit : Page
+    public partial class ShootingClubEdit : Page
     {
-        private long _organizerId;
-        private OrganizerRepository _organizerRepository;
+        private long _shootingClubId;
+        private ShootingClubRepository _shootingClubRepository;
 
-        public OrganizerEdit(Organizer organizer)
+        public ShootingClubEdit(ShootingClub shootingClub)
         {
             InitializeComponent();
-            _organizerRepository = new OrganizerRepository();
-            _organizerId = organizer.Id;
-            organizerEditor.Organizer = new OrganizerViewModel();
-            organizerEditor.Organizer.SetFromDbModel(organizer);
+            _shootingClubRepository = new ShootingClubRepository();
+            _shootingClubId = shootingClub.Id;
+            shootingClubEditor.ShootingClub = new ShootingClubViewModel();
+            shootingClubEditor.ShootingClub.SetFromDbModel(shootingClub);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var oganizer = organizerEditor.Organizer.ToDbModel();
-            oganizer.Id = _organizerId;
-            var updateSucceeded = _organizerRepository.Update(oganizer);
-            if (updateSucceeded) { MessageBox.Show("Orgganizator zapisany."); }
+            var shootingClub = shootingClubEditor.ShootingClub.ToDbModel();
+            shootingClub.Id = _shootingClubId;
+            var updateSucceeded = _shootingClubRepository.Update(shootingClub);
+            if (updateSucceeded) { MessageBox.Show("Klub zapisany."); }
         }
     }
 }

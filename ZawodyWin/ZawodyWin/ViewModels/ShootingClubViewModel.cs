@@ -4,7 +4,7 @@ using ZawodyWin.DataModels;
 
 namespace ZawodyWin.ViewModels
 {
-    public class OrganizerViewModel : INotifyPropertyChanged
+    public class ShootingClubViewModel : INotifyPropertyChanged
     {
         private string _name;
         private string _license;
@@ -49,9 +49,9 @@ namespace ZawodyWin.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Organizer ToDbModel()
+        public ShootingClub ToDbModel()
         {
-            return new Organizer
+            return new ShootingClub
             {
                 Name = Name,
                 License = License,
@@ -61,7 +61,7 @@ namespace ZawodyWin.ViewModels
             };
         }
 
-        public void SetFromDbModel(Organizer tournament)
+        public void SetFromDbModel(ShootingClub tournament)
         {
             _name = tournament.Name;
             _license = tournament.License;

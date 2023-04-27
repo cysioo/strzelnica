@@ -20,7 +20,7 @@
             <Hyperlink NavigateUri="ContestantList.xaml" >Zawodnicy</Hyperlink>
         </TextBlock>
         <TextBlock Margin="0,0,0,10">
-            <Hyperlink NavigateUri="OrganizerList.xaml" >Organizatorzy</Hyperlink>
+            <Hyperlink NavigateUri="ShootingClubList.xaml" >Kluby strzeleckie</Hyperlink>
         </TextBlock>
         <Button Content="Backup Danych"/>
         <Button Content="Wczytaj Dane"/>

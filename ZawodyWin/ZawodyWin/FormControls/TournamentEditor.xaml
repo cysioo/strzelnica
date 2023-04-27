@@ -42,7 +42,7 @@
                   StaysOpenOnEdit="True"
                   SelectedValue="{Binding OrganizerId, Mode=TwoWay}"/>
             <TextBlock Margin="0,0,0,10">
-                <Hyperlink NavigateUri="/Pages/OrganizerAdd.xaml" >Dodaj organizatora</Hyperlink>
+                <Hyperlink NavigateUri="/Pages/ShootingClubAdd.xaml" >Dodaj organizatora</Hyperlink>
             </TextBlock>
         </StackPanel>
         

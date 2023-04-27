@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
-using ZawodyWin.FormControls;
 
 namespace ZawodyWin.ViewModels
 {
@@ -83,7 +81,7 @@ namespace ZawodyWin.ViewModels
             _organizerId = tournament.OrganizerId;
         }
 
-        public void PopulateOrganizers(IEnumerable<Organizer> organizers)
+        public void PopulateOrganizers(IEnumerable<ShootingClub> organizers)
         {
             foreach (var organizer in organizers)
             {
