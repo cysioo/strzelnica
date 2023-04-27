@@ -1,12 +1,6 @@
-﻿//using Microsoft.Data.Sqlite;
-//using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Linq;
-using System.Reflection;
-using System.Windows.Markup;
 using ZawodyWin.DataModels;
 using ZawodyWin.DB;
 

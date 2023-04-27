@@ -1,13 +1,8 @@
-﻿//using Microsoft.Data.Sqlite;
-//using SQLite;
-using System.Collections.Generic;
-using System.Data.SQLite;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ZawodyWin.DataModels;
 using ZawodyWin.DB;
-using ZawodyWin.Pages;
 using ZawodyWin.ViewModels;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ZawodyWin.Repositories
 {

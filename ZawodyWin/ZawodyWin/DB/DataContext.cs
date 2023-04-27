@@ -11,5 +11,7 @@ namespace ZawodyWin.DB
         => options.UseSqlite(Settings.ConnectionString);
 
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Organizer> Organizers { get; set; }
+        public DbSet<Competition> Competitions { get; set; }
     }
 }
