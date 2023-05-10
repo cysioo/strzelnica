@@ -45,14 +45,12 @@ namespace ZawodyWin.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ClubName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long>("CompetitionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long>("PersonId")
