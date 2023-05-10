@@ -34,8 +34,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DB\CreateScripts\" />
-  </ItemGroup>
-
 </Project>
