@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZawodyWin.DataModels
 {
+    [Table("Contestant")]
     public class Contestant
     {
         public long Id { get; set; }
         public long PersonId { get; set; }
-        public string ClubName { get; set; }
+        public string? ClubName { get; set; }
         public long CompetitionId { get; set; }
-        public IList<int> Scores { get; private set; } = new List<int>();
-        public string Notes { get; set; }
+        public string? Scores { get; set; }  // JSON array
+        public string? Notes { get; set; }
     }
 }

@@ -42,5 +42,11 @@ namespace ZawodyWin.Pages
 
             if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
         }
+
+        private void contestantAdder_PersonAddClicked(object sender, FormControls.PersonAddClickedEventArgs e)
+        {
+            // add contestant if not added yet
+            // display message otherwise
+        }
     }
 }

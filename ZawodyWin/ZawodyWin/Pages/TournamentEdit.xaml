@@ -16,6 +16,9 @@
         
         <TextBlock FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20">Edycja zawodów</TextBlock>
         <formcontrols:TournamentEditor x:Name="tournamentEditor"/>
+
+        <formcontrols:PersonControl x:Name="contestantAdder" PersonAddClicked="contestantAdder_PersonAddClicked"/>
+
         <Button x:Name="btnSave" Click="btnSave_Click">Zapisz</Button>
     </StackPanel>
 </Page>

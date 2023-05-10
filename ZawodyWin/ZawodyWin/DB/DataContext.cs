@@ -11,5 +11,8 @@ namespace ZawodyWin.DB
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<ShootingClub> ShootingClubs { get; set; }
         public DbSet<Competition> Competitions { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Contestant> Contestants { get; set; }
+        public DbSet<Referee> Referees { get; set; }
     }
 }

@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <Content Include="DB\TournamentDB.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
