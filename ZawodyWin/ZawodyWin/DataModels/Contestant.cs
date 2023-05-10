@@ -9,7 +9,6 @@ namespace ZawodyWin.DataModels
         public long PersonId { get; set; }
         public string? ClubName { get; set; }
         public long CompetitionId { get; set; }
-        public string? Scores { get; set; }  // JSON array
         public string? Notes { get; set; }
     }
 }
