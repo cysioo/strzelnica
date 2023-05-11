@@ -43,10 +43,9 @@ namespace ZawodyWin.Pages
             if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
         }
 
-        private void contestantAdder_PersonAddClicked(object sender, FormControls.PersonAddClickedEventArgs e)
+        private void btnContestantsRedirect_Click(object sender, RoutedEventArgs e)
         {
-            // add contestant if not added yet
-            // display message otherwise
+            NavigationService.Navigate(new ContestantList(_tournamentId));
         }
     }
 }

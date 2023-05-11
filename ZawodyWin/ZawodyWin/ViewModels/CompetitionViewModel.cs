@@ -18,10 +18,10 @@ namespace ZawodyWin.ViewModels
             return result;
         }
 
-        public void SetFromDbModel(Competition tournament)
+        public void SetFromDbModel(Competition competition)
         {
-            Name = tournament.Name;
-            NumberOfRounds = tournament.NumberOfRounds;
+            Name = competition.Name;
+            NumberOfRounds = competition.NumberOfRounds;
         }
     }
 }
