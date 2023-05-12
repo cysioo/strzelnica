@@ -11,7 +11,7 @@ namespace ZawodyWin.Pages
     /// </summary>
     public partial class TournamentEdit : Page
     {
-        private long _tournamentId;
+        private Tournament _tournament;
         private TournamentRepository _tournamentRepository;
         private ShootingClubRepository _shootingClubRepository;
         private CompetitionRepository _competitionRepository;
@@ -23,7 +23,7 @@ namespace ZawodyWin.Pages
             _shootingClubRepository = new ShootingClubRepository();
             _competitionRepository = new CompetitionRepository();
 
-            _tournamentId = tournament.Id;
+            _tournament = tournament;
             tournamentEditor.Tournament = new TournamentViewModel();
             tournamentEditor.Tournament.SetFromDbModel(tournament);
             var allOrganizers = _shootingClubRepository.GetAll();
@@ -35,17 +35,17 @@ namespace ZawodyWin.Pages
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var tournament = tournamentEditor.Tournament.ToDbModel();
-            tournament.Id = _tournamentId;
+            tournament.Id = _tournament.Id;
             var updateSucceeded = _tournamentRepository.Update(tournament);
 
-            _competitionRepository.SetTournamentCompetitions(_tournamentId, tournamentEditor.Tournament.Competitions);
+            _competitionRepository.SetTournamentCompetitions(_tournament.Id, tournamentEditor.Tournament.Competitions);
 
             if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
         }
 
         private void btnContestantsRedirect_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ContestantList(_tournamentId));
+            NavigationService.Navigate(new ContestantList(_tournament));
         }
     }
 }

@@ -19,47 +19,38 @@ namespace ZawodyWin.Repositories
             }
         }
 
-        public IEnumerable<Contestant> GetTournamentContestants(long tournamentId)
+        public IEnumerable<Contestant> GetContestantsForCompetitions(IEnumerable<long> competitionIds)
         {
             using (var context = new DataContext())
             {
-                var competitionIds = context.Competitions.Where(x => x.TournamentId == tournamentId).Select(x => x.Id);
                 var contestants = context.Contestants.Where(x => competitionIds.Contains(x.CompetitionId)).Distinct();
                 return contestants.ToList();
             }
         }
 
-        public IEnumerable<Person> FilterBySurname(string surname)
+        public long Add(Contestant contestant)
         {
             using (var context = new DataContext())
             {
-                return context.People.Where(x => x.Surname.Contains(surname));
-            }
-        }
-
-        public long Add(Person person)
-        {
-            using (var context = new DataContext())
-            {
-                context.People.Add(person);
+                context.Contestants.Add(contestant);
                 context.SaveChanges();
-                return person.Id;
+                return contestant.Id;
             }
         }
 
-        internal bool Update(Person person)
+        internal bool Update(Contestant contestant)
         {
             using (var context = new DataContext())
             {
-                context.People.Attach(person).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.Contestants.Attach(contestant).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 var numberOfUpdatedRows = context.SaveChanges();
                 if (numberOfUpdatedRows == 0)
                 {
-                    throw new InvalidOperationException($"No tournament updated (expected to update tournament {person.Id}!.");
+                    throw new InvalidOperationException($"No tournament updated (expected to update tournament {contestant.Id}!.");
                 }
                 if (numberOfUpdatedRows > 1)
                 {
-                    throw new InvalidOperationException($"more then 1 tournament updated (expected to update only tournament {person.Id}!.");
+                    throw new InvalidOperationException($"more then 1 tournament updated (expected to update only tournament {contestant.Id}!.");
                 }
                 return numberOfUpdatedRows == 1;
             }

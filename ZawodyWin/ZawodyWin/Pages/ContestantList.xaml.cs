@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using ZawodyWin.DataModels;
 using ZawodyWin.Repositories;
 using ZawodyWin.ViewModels;
 
@@ -13,10 +16,29 @@ namespace ZawodyWin.Pages
         private CompetitionRepository _competitionRepository;
         private ContestantRepository _contestantRepository;
         private PersonRepository _personRepository;
+        private Tournament _tournament;
+        private IEnumerable<Competition> _competitions;
 
         public ContestantListViewModel ViewModel { get; set; }
 
         public ContestantList()
+        {
+            Initialize();
+            contestantAdder.Visibility = Visibility.Collapsed;
+            _competitions = _competitionRepository.GetAll();
+            PopulateViewModel(_competitions);
+        }
+
+        public ContestantList(Tournament tournament)
+        {
+            Initialize();
+
+            _tournament = tournament;
+            _competitions = _competitionRepository.GetByTournamentId(tournament.Id);
+            PopulateViewModel(_competitions);
+        }
+
+        private void Initialize()
         {
             InitializeComponent();
             _competitionRepository = new CompetitionRepository();
@@ -26,11 +48,10 @@ namespace ZawodyWin.Pages
             DataContext = ViewModel;
         }
 
-        public ContestantList(long tournamentId): this() 
+        private void PopulateViewModel(IEnumerable<Competition> competitions)
         {
-            var competitions = _competitionRepository.GetByTournamentId(tournamentId);
-            var contestants = _contestantRepository.GetTournamentContestants(tournamentId);
-            foreach ( var contestant in contestants)
+            var contestants = _contestantRepository.GetContestantsForCompetitions(competitions.Select(x => x.Id));
+            foreach (var contestant in contestants)
             {
                 var person = _personRepository.Get(contestant.PersonId);
                 var contestantModel = new ContestantViewModel();
@@ -40,14 +61,29 @@ namespace ZawodyWin.Pages
                     var competitionModel = new CompetitionViewModel();
                     competitionModel.SetFromDbModel(competition);
                 }
+
+                ViewModel.Contestants.Add(contestantModel);
             }
         }
 
         private void contestantAdder_PersonAddClicked(object sender, FormControls.PersonAddClickedEventArgs e)
         {
-            // add contestant if not added yet
-            // display message otherwise
-            //ViewModel.AddContestant();
+            if (ViewModel.DoesContestantExist(e.Person))
+            {
+                MessageBox.Show($"{e.Person.Name} {e.Person.Surname} już jest na liście zawodników");
+            }
+            else
+            {
+                // TODO: set club name on person and contestants
+                foreach (var competition in _competitions)
+                {
+                    var contestant = new Contestant { PersonId = e.Person.Id, CompetitionId = competition.Id };
+                    _contestantRepository.Add(contestant);
+                    var contestantViewModel = new ContestantViewModel();
+                    contestantViewModel.SetFromDbModel(contestant, e.Person);
+                    ViewModel.Contestants.Add(contestantViewModel);
+                }
+            }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -56,8 +92,8 @@ namespace ZawodyWin.Pages
             Button button = (Button)sender;
             button.Content = "Save";
             button.Visibility = Visibility.Collapsed;
-            var row = (DataGridRow)button.TemplatedParent;
-            row.IsSelected = true;
+            //var row = (DataGridRow)button.TemplatedParent;
+            //row.IsSelected = true;
             gridContestants.BeginEdit();
         }
 
@@ -67,9 +103,9 @@ namespace ZawodyWin.Pages
             Button button = (Button)sender;
             button.Content = "Edit";
             button.Visibility = Visibility.Collapsed;
-            var row = (DataGridRow)button.TemplatedParent;
+            //var row = (DataGridRow)button.TemplatedParent;
             gridContestants.CommitEdit();
-            row.IsSelected = false;
+            //row.IsSelected = false;
         }
     }
 }

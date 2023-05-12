@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using ZawodyWin.DataModels;
+using System.Linq;
 
 namespace ZawodyWin.ViewModels
 {
@@ -60,6 +61,11 @@ namespace ZawodyWin.ViewModels
         //    SelectedContestant = null;
         //    IsEditing = false;
         //}
+
+        public bool DoesContestantExist(Person person)
+        {
+            return Contestants.Any(x => x.PersonId == person.Id);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

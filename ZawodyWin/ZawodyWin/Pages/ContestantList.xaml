@@ -17,42 +17,9 @@
         <formcontrols:PersonControl x:Name="contestantAdder" PersonAddClicked="contestantAdder_PersonAddClicked"/>
         <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Contestants}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Imię">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding Name, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Nazwisko">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Surname}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding Surname, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Klub">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding ClubName}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding ClubName, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Klub" Binding="{Binding ClubName, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTemplateColumn Header="Konkurencje">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
