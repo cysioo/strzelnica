@@ -51,13 +51,27 @@ namespace ZawodyWin.ViewModels
         public string? ClubName
         {
             get { return _clubName; }
-            set { _clubName = value; OnPropertyChanged(nameof(ClubName)); }
+            set
+            {
+                _clubName = value;
+                var contestant = _contestantRepository.Get(Id);
+                contestant.ClubName = value;
+                _contestantRepository.Update(contestant);
+                OnPropertyChanged(nameof(ClubName));
+            }
         }
 
         public string? Notes
         {
             get { return _notes; }
-            set { _notes = value; OnPropertyChanged(nameof(Notes)); }
+            set
+            {
+                _notes = value;
+                var contestant = _contestantRepository.Get(Id);
+                contestant.Notes = value;
+                _contestantRepository.Update(contestant);
+                OnPropertyChanged(nameof(Notes));
+            }
         }
         public ObservableCollection<ContestantsCompetitionViewModel> Competitions { get; set; }
 
