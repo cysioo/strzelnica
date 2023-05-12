@@ -54,7 +54,7 @@ namespace ZawodyWin.Pages
             foreach (var contestant in contestants)
             {
                 var person = _personRepository.Get(contestant.PersonId);
-                var contestantModel = new ContestantViewModel();
+                var contestantModel = new ContestantViewModel(_contestantRepository, _personRepository);
                 contestantModel.SetFromDbModel(contestant, person);
                 foreach (var competition in competitions)
                 {
@@ -79,7 +79,7 @@ namespace ZawodyWin.Pages
                 {
                     var contestant = new Contestant { PersonId = e.Person.Id, CompetitionId = competition.Id };
                     _contestantRepository.Add(contestant);
-                    var contestantViewModel = new ContestantViewModel();
+                    var contestantViewModel = new ContestantViewModel(_contestantRepository, _personRepository);
                     contestantViewModel.SetFromDbModel(contestant, e.Person);
                     ViewModel.Contestants.Add(contestantViewModel);
                 }

@@ -41,11 +41,6 @@ namespace ZawodyWin.ViewModels
         {
             Contestants = new ObservableCollection<ContestantViewModel>();
             
-            Contestants.Add(new ContestantViewModel { Name = "John", Surname = "Doe", 
-                Competitions = new ObservableCollection<ContestantsCompetitionViewModel> { 
-                    new ContestantsCompetitionViewModel { Name = "Math", Scores = new ObservableCollection<long> { 10, 20, 30 } }, 
-                    new ContestantsCompetitionViewModel { Name = "Science", Scores = new ObservableCollection<long> { 40, 50, 60 } } } });
-
             //EditCommand = new RelayCommand<ContestantViewModel>(EditContestant);
             //SaveCommand = new RelayCommand<ContestantViewModel>(SaveContestant);
         }
