@@ -73,7 +73,7 @@ namespace ZawodyWin.ViewModels
                 OnPropertyChanged(nameof(Notes));
             }
         }
-        public ObservableCollection<ContestantsCompetitionViewModel> Competitions { get; set; }
+        public ObservableCollection<ContestantsCompetitionViewModel> Competitions { get; private set; } = new ObservableCollection<ContestantsCompetitionViewModel>();
 
         public void SetFromDbModel(Contestant contestant, Person person)
         {

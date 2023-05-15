@@ -26,9 +26,14 @@
                             <ItemsControl ItemsSource="{Binding Competitions}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}" />
                                             <ItemsControl ItemsSource="{Binding Scores}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBox Text="{Binding Path=., Mode=TwoWay}" />

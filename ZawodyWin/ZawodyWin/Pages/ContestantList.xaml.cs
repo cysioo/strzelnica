@@ -58,8 +58,9 @@ namespace ZawodyWin.Pages
                 contestantModel.SetFromDbModel(contestant, person);
                 foreach (var competition in competitions)
                 {
-                    var competitionModel = new CompetitionViewModel();
+                    var competitionModel = new ContestantsCompetitionViewModel();
                     competitionModel.SetFromDbModel(competition);
+                    contestantModel.Competitions.Add(competitionModel);
                 }
 
                 ViewModel.Contestants.Add(contestantModel);
