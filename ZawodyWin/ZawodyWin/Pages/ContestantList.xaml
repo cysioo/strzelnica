@@ -36,7 +36,7 @@
                                                 </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBox Text="{Binding Path=., Mode=TwoWay}" />
+                                                        <TextBox Text="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" LostFocus="tbPointsInRound_LostFocus" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>

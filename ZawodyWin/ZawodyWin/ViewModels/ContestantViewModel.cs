@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using ZawodyWin.DataModels;
 using ZawodyWin.Repositories;
@@ -15,11 +16,13 @@ namespace ZawodyWin.ViewModels
         private string _notes;
         private ContestantRepository _contestantRepository;
         private PersonRepository _personRepository;
+        private ScoreRepository _scoreRepository;
 
-        public ContestantViewModel(ContestantRepository contestantRepository, PersonRepository personRepository)
+        public ContestantViewModel(ContestantRepository contestantRepository, PersonRepository personRepository, ScoreRepository scoreRepository)
         {
             _contestantRepository = contestantRepository;
             _personRepository = personRepository;
+            _scoreRepository = scoreRepository;
         }
 
         public long Id { get; set; }
@@ -74,6 +77,8 @@ namespace ZawodyWin.ViewModels
             }
         }
         public ObservableCollection<ContestantsCompetitionViewModel> Competitions { get; private set; } = new ObservableCollection<ContestantsCompetitionViewModel>();
+
+        public DataTable CompetitionsDataTable = new DataTable();
 
         public void SetFromDbModel(Contestant contestant, Person person)
         {
