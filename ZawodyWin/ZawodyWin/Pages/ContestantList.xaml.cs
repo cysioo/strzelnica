@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.DataModels;
-using ZawodyWin.Migrations;
 using ZawodyWin.Repositories;
 using ZawodyWin.ViewModels;
 
@@ -63,24 +62,8 @@ namespace ZawodyWin.Pages
                 var person = _personRepository.Get(contestant.PersonId);
                 var contestantModel = new ContestantViewModel(_contestantRepository, _personRepository, _scoreRepository);
                 contestantModel.SetFromDbModel(contestant, person);
-                //contestantModel.CompetitionsDataTable.Columns.Add("Konkurencja");
-                //for (int i = 0; i < numberOfRounds; i++)
-                //{
-                //    contestantModel.CompetitionsDataTable.Columns.Add($"Runda {i}");
-                //}
-                //contestantModel.CompetitionsDataTable.Columns.Add("Razem");
                 foreach (var competition in competitions)
                 {
-                    //var row = new List<object>();
-                    //var rowRow = new DataGridTemplateColumn();
-                    //row.Add(competition.Name);
-                    //for (var i = 0; i < numberOfRounds; ++i)
-                    //{
-                    //    row.Add(0);
-                    //}
-                    //row.Add(2); // total
-                    //contestantModel.CompetitionsDataTable.Rows.Add(row);
-
                     var contestantScores = scores.Where(s => s.ContestantId == contestant.Id && s.CompetitionId == competition.Id);
                     var competitionModel = new ContestantsCompetitionViewModel();
                     competitionModel.SetFromDbModel(competition);
@@ -119,35 +102,6 @@ namespace ZawodyWin.Pages
                     ViewModel.Contestants.Add(contestantViewModel);
                 }
             }
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Change the button content to "Save" and enable editing mode for the row
-            Button button = (Button)sender;
-            button.Content = "Save";
-            button.Visibility = Visibility.Collapsed;
-            //var row = (DataGridRow)button.TemplatedParent;
-            //row.IsSelected = true;
-            gridContestants.BeginEdit();
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Change the button content back to "Edit" and disable editing mode for the row
-            Button button = (Button)sender;
-            button.Content = "Edit";
-            button.Visibility = Visibility.Collapsed;
-            //var row = (DataGridRow)button.TemplatedParent;
-            gridContestants.CommitEdit();
-            //row.IsSelected = false;
-        }
-
-        private void tbPointsInRound_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var tbPoints = (TextBox)sender;
-            var oldPoints = tbPoints.DataContext;
-            var newPointsTxt = tbPoints.Text;
         }
     }
 }
