@@ -45,7 +45,7 @@ namespace ZawodyWin.Pages
 
         private void btnContestantsRedirect_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ContestantList(_tournament));
+            NavigationService.Navigate(new TournamentContestantList(_tournament));
         }
     }
 }

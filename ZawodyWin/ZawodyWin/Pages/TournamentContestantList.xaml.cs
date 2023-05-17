@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +9,9 @@ using ZawodyWin.ViewModels;
 namespace ZawodyWin.Pages
 {
     /// <summary>
-    /// Interaction logic for ContestantList.xaml
+    /// Interaction logic for TournamentContestantList.xaml
     /// </summary>
-    public partial class ContestantList : Page
+    public partial class TournamentContestantList : Page
     {
         private CompetitionRepository _competitionRepository;
         private ContestantRepository _contestantRepository;
@@ -23,11 +22,12 @@ namespace ZawodyWin.Pages
 
         public ContestantListViewModel ViewModel { get; set; }
 
-        public ContestantList()
+        public TournamentContestantList(Tournament tournament)
         {
             Initialize();
-            contestantAdder.Visibility = Visibility.Collapsed;
-            _competitions = _competitionRepository.GetAll();
+
+            _tournament = tournament;
+            _competitions = _competitionRepository.GetByTournamentId(tournament.Id);
             PopulateViewModel(_competitions);
         }
 
