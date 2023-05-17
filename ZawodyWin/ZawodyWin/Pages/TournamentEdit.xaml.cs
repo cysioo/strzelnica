@@ -32,15 +32,31 @@ namespace ZawodyWin.Pages
             tournamentEditor.Tournament.PopulateCompetitions(competitions);
         }
 
+        private bool IsViewModelValid
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(tournamentEditor.Tournament.Name))
+                {
+                    MessageBox.Show("Wpisz nazwę turnieju");
+                    return false;
+                }
+                return true;
+            }
+        }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var tournament = tournamentEditor.Tournament.ToDbModel();
-            tournament.Id = _tournament.Id;
-            var updateSucceeded = _tournamentRepository.Update(tournament);
+            if (IsViewModelValid)
+            {
+                var tournament = tournamentEditor.Tournament.ToDbModel();
+                tournament.Id = _tournament.Id;
+                var updateSucceeded = _tournamentRepository.Update(tournament);
 
-            _competitionRepository.SetTournamentCompetitions(_tournament.Id, tournamentEditor.Tournament.Competitions);
+                _competitionRepository.SetTournamentCompetitions(_tournament.Id, tournamentEditor.Tournament.Competitions);
 
-            if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
+                if (updateSucceeded) { MessageBox.Show("Turniej zapisany."); }
+            }
         }
 
         private void btnContestantsRedirect_Click(object sender, RoutedEventArgs e)
