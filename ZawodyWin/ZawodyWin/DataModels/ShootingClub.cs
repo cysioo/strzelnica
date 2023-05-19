@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZawodyWin.DataModels
 {
@@ -12,5 +13,6 @@ namespace ZawodyWin.DataModels
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
         public string? LogoPath { get; set; }
+        public ICollection<Tournament> Tournaments { get; set; }
     }
 }

@@ -10,5 +10,8 @@ namespace ZawodyWin.DataModels
         public string? RefereeFunction { get; set; }
         public long? RefereeClass { get; set; }
         public long TournamentId { get; set; }
+        public bool IsLeading { get; set; }
+        public Person Person { get; set; }
+        public Tournament Tournament { get; set; }
     }
 }

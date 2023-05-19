@@ -10,5 +10,7 @@ namespace ZawodyWin.DataModels
         public long CompetitionId { get; set; }
         public long Round { get; set; }
         public long Points { get; set; }
+        public Competition Competition { get; set; }
+        public Contestant Contestant { get; set; }
     }
 }

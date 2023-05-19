@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZawodyWin.DataModels
 {
@@ -9,5 +10,7 @@ namespace ZawodyWin.DataModels
         public string Name { get; set; }
         public long NumberOfRounds { get; set; }
         public long TournamentId { get; set; }
+        public Tournament Tournament { get; set; }
+        public ICollection<Contestant> Contestants { get; set; }
     }
 }

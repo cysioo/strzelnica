@@ -10,5 +10,7 @@ namespace ZawodyWin.DataModels
         public string? ClubName { get; set; }
         public long CompetitionId { get; set; }
         public string? Notes { get; set; }
+        public Person Person { get; set; }
+        public Competition Competition { get; set; }
     }
 }
