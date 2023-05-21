@@ -49,11 +49,8 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Miejsce:"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Place, Mode=TwoWay}"/>
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Sędzia główny:"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LeadingRefereeId, Mode=TwoWay}"/>
-
-        <Label Grid.Row="6" Grid.Column="0" Content="Konkurencje:"/>
-        <Grid Grid.Row="6" Grid.Column="1">
+        <Label Grid.Row="5" Grid.Column="0" Content="Konkurencje:"/>
+        <Grid Grid.Row="5" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
@@ -65,7 +62,7 @@
             <Button x:Name="addNewCompetitionButton" Grid.Column="2" Content="Dodaj konkurencję" Click="AddNewCompetitionButton_Click" Margin="0 0 10 0" Width="100"/>
         </Grid>
         
-        <ListView Grid.Row="7" Grid.Column="1" x:Name="competitionListView" 
+        <ListView Grid.Row="6" Grid.Column="1" x:Name="competitionListView" 
                   ItemsSource="{Binding Competitions}" SelectionMode="Single"
                   SelectionChanged="CompetitionListView_SelectionChanged">
             <ListView.ItemContainerStyle>

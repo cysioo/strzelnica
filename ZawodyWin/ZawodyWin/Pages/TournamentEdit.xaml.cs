@@ -30,6 +30,8 @@ namespace ZawodyWin.Pages
             tournamentEditor.Tournament.PopulateOrganizers(allOrganizers);
             var competitions = _competitionRepository.GetByTournamentId(tournament.Id);
             tournamentEditor.Tournament.PopulateCompetitions(competitions);
+
+            refereesControl.Tournament = tournament;
         }
 
         private bool IsViewModelValid

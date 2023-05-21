@@ -13,7 +13,11 @@ namespace ZawodyWin.FormControls
         public TournamentViewModel Tournament
         {
             get { return (TournamentViewModel)DataContext; }
-            set { DataContext = value; }
+            set
+            {
+                DataContext = value;
+                //refereesControl.Tournament = value.t
+            }
         }
 
         public TournamentEditor()

@@ -13,7 +13,6 @@ namespace ZawodyWin.ViewModels
         private DateTime? _date;
         private long? _organizerId;
         private string? _place;
-        private long? _leadingRefereeId;
         private ObservableCollection<CompetitionViewModel> _competitions = new ObservableCollection<CompetitionViewModel>();
         private CompetitionViewModel _selectedCompetition;
 
@@ -55,19 +54,12 @@ namespace ZawodyWin.ViewModels
             set { _selectedCompetition = value; OnPropertyChanged(nameof(SelectedCompetition)); }
         }
 
-        public long? LeadingRefereeId
-        {
-            get { return _leadingRefereeId; }
-            set { _leadingRefereeId = value; OnPropertyChanged(); }
-        }
-
         public Tournament ToDbModel()
         {
             var result = new Tournament();
             result.Name = Name;
             result.Place = Place;
             result.Date = Date;
-            result.LeadingRefereeId = LeadingRefereeId;
             result.OrganizerId = OrganizerId;
             return result;
         }
@@ -77,7 +69,6 @@ namespace ZawodyWin.ViewModels
             _name = tournament.Name;
             _place = tournament.Place;
             _date = tournament.Date;
-            _leadingRefereeId = tournament.LeadingRefereeId;
             _organizerId = tournament.OrganizerId;
         }
 

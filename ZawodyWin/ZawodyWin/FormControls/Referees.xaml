@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="ZawodyWin.FormControls.Referees"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZawodyWin.FormControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <StackPanel>
+
+        <TextBlock Margin="0,0,0,10">
+            <Hyperlink NavigateUri="HomePage.xaml" >Powrót do strony głównej</Hyperlink>
+        </TextBlock>
+
+        <local:PersonControl x:Name="refereeAdder" PersonAddClicked="refereeAdder_PersonAddClicked"/>
+        <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Contestants}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Funkcja" Binding="{Binding RefereeFunction, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Klasa" Binding="{Binding RefereeClass, UpdateSourceTrigger=LostFocus}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

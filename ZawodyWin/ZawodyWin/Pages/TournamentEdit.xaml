@@ -17,6 +17,9 @@
         <TextBlock FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20">Edycja zawodów</TextBlock>
         <formcontrols:TournamentEditor x:Name="tournamentEditor"/>
 
+        <Label Grid.Row="5" Grid.Column="0" Content="Sędziowie:"/>
+        <formcontrols:Referees x:Name="refereesControl" Margin="0,0,0,20"/>
+
         <Button x:Name="btnContestantsRedirect" Click="btnContestantsRedirect_Click">Zawodnicy</Button>
 
         <Button x:Name="btnSave" Click="btnSave_Click">Zapisz</Button>
