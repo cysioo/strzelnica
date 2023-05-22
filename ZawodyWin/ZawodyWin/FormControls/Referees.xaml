@@ -14,7 +14,7 @@
         </TextBlock>
 
         <local:PersonControl x:Name="refereeAdder" PersonAddClicked="refereeAdder_PersonAddClicked"/>
-        <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Contestants}" AutoGenerateColumns="False">
+        <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Referees}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
