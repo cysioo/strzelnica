@@ -56,7 +56,8 @@ namespace ZawodyWin.ViewModels
                 PersonId = referee.PersonId,
                 Name = person.Name,
                 Surname = person.Surname,
-                RefereeClass = referee.RefereeClass
+                RefereeClass = referee.RefereeClass,
+                RefereeFunction = referee.RefereeFunction,
             };
             _referees.Add(model);
         }
