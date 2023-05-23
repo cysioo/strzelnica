@@ -8,22 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PdfFactory.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="DB\TournamentDB.db" />
+    <None Remove="Pdf\CompetitionRowTemplate.html" />
+    <None Remove="Pdf\RefereesRowTemplate.html" />
+    <None Remove="Pdf\ResultsTemplate.html" />
+    <None Remove="Pdf\Templates\ProtocolListItemTemplate.html" />
+    <None Remove="Pdf\Templates\RefereeCardTemplate.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="DB\TournamentDB.db">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pdf\Templates\RefereeCardTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf\Templates\ProtocolListItemTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf\Templates\CompetitionRowTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf\Templates\RefereesRowTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf\Templates\ResultsTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="itext7.pdfhtml" Version="4.0.5" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.0" />
+    <PackageReference Include="itext7.pdfhtml" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <style>
+        body {
+        }
+
+        .organizer {
+        }
+
+        .logo {
+        }
+
+        .footer {
+            position: absolute;
+            top: 11.82in;
+            left: 1.08in;
+            width: 4.56in;
+            line-height: 0.15in;
+        }
+
+        .tournament-name {
+        }
+
+        .place {
+        }
+
+        .referees {
+        }
+        .referees-header {
+        }
+
+        .referees-table-head {
+        }
+
+        .referees-table {
+        }
+
+        .competition {
+        }
+        .competition-header {
+        }
+
+        .competition-table-header {
+        }
+
+        .competition-table {
+        }
+    </style>
+</head>
+<body>
+    <div class="organizer">
+        <p>
+            [[organizer-name]]
+        </p>
+        <p>
+            [[organizer-license]]
+        </p>
+        <p>
+            [[organizer-addressLine1]]
+        </p>
+        <p>
+            [[organizer-addressLine2]]
+        </p>
+    </div>
+
+    <div class="logo">
+        <img src="[[logoPath]]" />
+    </div>
+
+    <div class="tournament-name">
+        <p>[[tournament-name]]</p>
+        <p>Rezultaty</p>
+    </div>
+
+    <div class="place">
+        <p>[[place]], [[time]]</p>
+    </div>
+
+    <div class="referees">
+        <p class="referees-header">Obsada sędziowska</p>
+
+        <table>
+            <tr>
+                <th>Lp.</th>
+                <td>Funkcje sędziowskie</td>
+                <td>Imię i nazwisko</td>
+                <td>Klasa sędziowska</td>
+            </tr>
+            <!--[[referee-rows]]-->
+        </table>
+    </div>
+
+    <div class="competition">
+        <p class="competition-header">Protokół nr [[competition-no]] - [[competition-name]]</p>
+
+        <table>
+            <tr>
+                <th>Miejsce</th>
+                <td>Nazwisko i imię</td>
+                <td>Klub</td>
+                <!--[[competition-series-header-cell]]-->
+                <td>Wynik</td>
+                <td>Uwagi</td>
+            </tr>
+            <!--[[competition-rows]]-->
+        </table>
+    </div>
+
+    <div class="summary">
+
+        <div class="summary-title">
+            <p>[[tournament-name]]</p>
+            <p>[[place]], [[time]]</p>
+        </div>
+
+        <p>KOMUNIKAT ZAWIERA [[number-of-competitions]] PROTOKOŁÓW</p>
+        <ul>
+            <!--[[protocol-list-items]]-->
+        </ul>
+
+        <p>Zawody odbyły się na Strzelnicy Sportowej [[place-long]]</p>
+        <p>Zawody przeprowadzono zgodnie z regulaminem.</p>
+        <p>Protestów nie składano</p>
+
+        <div class="summary-referees">
+            <!--[[referee-cards]]-->
+        </div>
+    </div>
+</body>
+</html>

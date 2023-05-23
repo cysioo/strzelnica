@@ -23,5 +23,6 @@
         <Button x:Name="btnContestantsRedirect" Click="btnContestantsRedirect_Click">Zawodnicy</Button>
 
         <Button x:Name="btnSave" Click="btnSave_Click">Zapisz</Button>
+        <Button x:Name="btnPdf" Click="btnPdf_Click">Stwórz PDF</Button>
     </StackPanel>
 </Page>

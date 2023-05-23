@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.DataModels;
+using ZawodyWin.Pdf;
 using ZawodyWin.Repositories;
 using ZawodyWin.ViewModels;
 
@@ -64,6 +66,14 @@ namespace ZawodyWin.Pages
         private void btnContestantsRedirect_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new TournamentContestantList(_tournament));
+        }
+
+        private void btnPdf_Click(object sender, RoutedEventArgs e)
+        {
+            var pdfFactory = new PdfFactory();
+            var html = File.ReadAllText("Pdf\\Templates\\ResultsTemplate.html");
+            pdfFactory.CreatePdf(html, "C:\\temp\\strzelnica\\wyniki.pdf");
+            MessageBox.Show("Pfd gotowy");
         }
     }
 }
