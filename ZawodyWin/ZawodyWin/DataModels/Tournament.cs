@@ -12,7 +12,8 @@ namespace ZawodyWin.DataModels
         public string Name { get; set; }
         public DateTime? Date { get; set; }
         public long? OrganizerId { get; set; }
-        public string? Place { get; set; }
+        public string? City { get; set; }
+        public string? FullAddress { get; set; }
 
         public ShootingClub Organizer { get; set; }
         public ICollection<Competition> Competitions { get; set; }

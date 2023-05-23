@@ -12,7 +12,8 @@ namespace ZawodyWin.ViewModels
         private string _name;
         private DateTime? _date;
         private long? _organizerId;
-        private string? _place;
+        private string? _city;
+        private string? _fullAddress;
         private ObservableCollection<CompetitionViewModel> _competitions = new ObservableCollection<CompetitionViewModel>();
         private CompetitionViewModel _selectedCompetition;
 
@@ -36,10 +37,16 @@ namespace ZawodyWin.ViewModels
 
         public IDictionary<long, string> AvailableOrganizers { get; private set; } = new Dictionary<long, string>();
 
-        public string? Place
+        public string? City
         {
-            get { return _place; }
-            set { _place = value; OnPropertyChanged(); }
+            get { return _city; }
+            set { _city = value; OnPropertyChanged(); }
+        }
+
+        public string? FullAddress
+        {
+            get { return _fullAddress; }
+            set { _fullAddress = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<CompetitionViewModel> Competitions
@@ -58,7 +65,7 @@ namespace ZawodyWin.ViewModels
         {
             var result = new Tournament();
             result.Name = Name;
-            result.Place = Place;
+            result.City = City;
             result.Date = Date;
             result.OrganizerId = OrganizerId;
             return result;
@@ -67,7 +74,7 @@ namespace ZawodyWin.ViewModels
         public void SetFromDbModel(Tournament tournament)
         {
             _name = tournament.Name;
-            _place = tournament.Place;
+            _city = tournament.City;
             _date = tournament.Date;
             _organizerId = tournament.OrganizerId;
         }
