@@ -71,7 +71,7 @@ namespace ZawodyWin.Pages
         private void btnPdf_Click(object sender, RoutedEventArgs e)
         {
             var pdfFactory = new PdfFactory();
-            var html = File.ReadAllText("Pdf\\Templates\\ResultsTemplate.html");
+            var html = pdfFactory.CreateTournamentHtml(_tournament);
             pdfFactory.CreatePdf(html, "C:\\temp\\strzelnica\\wyniki.pdf");
             MessageBox.Show("Pfd gotowy");
         }
