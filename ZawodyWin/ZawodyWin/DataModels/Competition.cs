@@ -12,5 +12,6 @@ namespace ZawodyWin.DataModels
         public long TournamentId { get; set; }
         public Tournament Tournament { get; set; }
         public ICollection<Contestant> Contestants { get; set; }
+        public ICollection<Score> Scores { get; set; }
     }
 }

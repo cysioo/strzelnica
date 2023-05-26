@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using ZawodyWin.DataModels;
 using ZawodyWin.DB;
@@ -71,6 +72,14 @@ namespace ZawodyWin.Repositories
             using (var context = new DataContext())
             {
                 return context.Competitions.Where(x => x.TournamentId == tournamentId).ToList();
+            }
+        }
+
+        public IEnumerable<Competition> GetWithScoresByTournamentId(long tournamentId)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Competitions.Where(x => x.TournamentId == tournamentId).Include(x => x.Scores).ToList();
             }
         }
 

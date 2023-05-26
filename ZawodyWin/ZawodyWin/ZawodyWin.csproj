@@ -12,6 +12,7 @@
     <None Remove="Pdf\CompetitionRowTemplate.html" />
     <None Remove="Pdf\RefereesRowTemplate.html" />
     <None Remove="Pdf\ResultsTemplate.html" />
+    <None Remove="Pdf\Templates\CompetitionResultsTemplate.html" />
     <None Remove="Pdf\Templates\ProtocolListItemTemplate.html" />
     <None Remove="Pdf\Templates\RefereeCardTemplate.html" />
   </ItemGroup>
@@ -19,6 +20,9 @@
   <ItemGroup>
     <Content Include="DB\TournamentDB.db">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf\Templates\CompetitionResultsTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Pdf\Templates\RefereeCardTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

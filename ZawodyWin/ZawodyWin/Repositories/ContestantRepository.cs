@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZawodyWin.DataModels;
@@ -23,7 +24,7 @@ namespace ZawodyWin.Repositories
         {
             using (var context = new DataContext())
             {
-                var contestants = context.Contestants.Where(x => competitionIds.Contains(x.CompetitionId)).Distinct();
+                var contestants = context.Contestants.Where(x => competitionIds.Contains(x.CompetitionId)).Include(x => x.Person);
                 return contestants.ToList();
             }
         }

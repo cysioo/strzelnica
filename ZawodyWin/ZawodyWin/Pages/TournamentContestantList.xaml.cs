@@ -50,7 +50,7 @@ namespace ZawodyWin.Pages
             var numberOfRounds = competitions.Max(x => x.NumberOfRounds);
             foreach (var contestant in contestants)
             {
-                var person = _personRepository.Get(contestant.PersonId);
+                var person = contestant.Person; // _personRepository.Get(contestant.PersonId);
                 var contestantModel = new ContestantViewModel(_contestantRepository, _personRepository, _scoreRepository);
                 contestantModel.SetFromDbModel(contestant, person);
                 foreach (var competition in competitions)

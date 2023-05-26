@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZawodyWin.DataModels
 {
@@ -12,5 +13,6 @@ namespace ZawodyWin.DataModels
         public string? Notes { get; set; }
         public Person Person { get; set; }
         public Competition Competition { get; set; }
+        public ICollection<Score> Scores { get; set; }
     }
 }
