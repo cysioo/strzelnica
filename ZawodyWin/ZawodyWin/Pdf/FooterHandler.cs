@@ -6,6 +6,7 @@ using iText.Kernel.Pdf.Xobject;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using ZawodyWin.Pdf.DataModels;
 
 namespace ZawodyWin.Pdf
 {
@@ -13,6 +14,13 @@ namespace ZawodyWin.Pdf
     {
         protected float x = 40;
         protected float y = 25;
+
+        public FooterHandler(FooterModel model)
+        {
+            Model = model;
+        }
+
+        public FooterModel Model { get; set; }
 
         public virtual void HandleEvent(Event @event)
         {
@@ -25,8 +33,8 @@ namespace ZawodyWin.Pdf
             Canvas canvas = new Canvas(pdfCanvas, pageSize);
             canvas.SetFontSize(8);
             Paragraph p = new Paragraph()
-                .Add("Komunikat klasyfikacyjny {tournament.name} {tournament.date}\n")
-                .Add("Przewodniczący Komisji RTS: {referee.Name} {referee.Surname}, sędzia kl. {referee.Class}");
+                .Add($"Komunikat klasyfikacyjny {Model.TournamentName} {Model.TournamentDate}\n")
+                .Add($"Przewodniczący Komisji RTS: {Model.RefereeName} {Model.RefereeSurname}, sędzia kl. {Model.RefereeClass}");
 
             canvas.ShowTextAligned(p, x, y, TextAlignment.LEFT);
             canvas.Close();
