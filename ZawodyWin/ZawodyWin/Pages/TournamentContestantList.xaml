@@ -8,47 +8,49 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TournamentContestantList">
 
-    <StackPanel>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
 
-        <TextBlock Margin="0,0,0,10">
+            <TextBlock Margin="0,0,0,10">
             <Hyperlink NavigateUri="HomePage.xaml" >Powrót do strony głównej</Hyperlink>
-        </TextBlock>
+            </TextBlock>
 
-        <formcontrols:PersonControl x:Name="contestantAdder" PersonAddClicked="contestantAdder_PersonAddClicked"/>
-        <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Contestants}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Klub" Binding="{Binding ClubName, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTemplateColumn Header="Konkurencje">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding Competitions}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}" />
-                                            <ItemsControl ItemsSource="{Binding Scores}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel Orientation="Horizontal"/>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox Text="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                            <TextBlock Text="{Binding TotalScore}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+            <formcontrols:PersonControl x:Name="contestantAdder" PersonAddClicked="contestantAdder_PersonAddClicked"/>
+            <DataGrid x:Name="gridContestants" Grid.Row="1" ItemsSource="{Binding Contestants}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Imię" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn Header="Klub" Binding="{Binding ClubName, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTemplateColumn Header="Konkurencje">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Competitions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" />
+                                                <ItemsControl ItemsSource="{Binding Scores}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBox Text="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                                <TextBlock Text="{Binding TotalScore}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
