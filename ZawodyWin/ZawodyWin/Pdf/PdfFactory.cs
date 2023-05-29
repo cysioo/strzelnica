@@ -1,10 +1,13 @@
 ﻿using iText.Html2pdf;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using ZawodyWin.DataModels;
 using ZawodyWin.Repositories;
 
@@ -111,9 +114,12 @@ namespace ZawodyWin.Pdf
 
         public void CreatePdf(string html, string savePath)
         {
-            var pdfStream = File.Create(savePath);
+            PdfWriter writer = new PdfWriter(savePath);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            var footerHandler = new FooterHandler();
+            pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, footerHandler);
             ConverterProperties converterProperties = new ConverterProperties();
-            HtmlConverter.ConvertToPdf(html, pdfStream, converterProperties);
+            HtmlConverter.ConvertToPdf(html, pdfDocument, converterProperties);
         }
     }
 }

@@ -11,48 +11,24 @@ namespace ZawodyWin.Pdf
 {
     public class FooterHandler : IEventHandler
     {
-        protected PdfFormXObject placeholder;
-        protected float side = 20;
-        protected float x = 300;
+        protected float x = 40;
         protected float y = 25;
-        protected float space = 4.5f;
-        protected float descent = 3;
-
-        public FooterHandler()
-        {
-            placeholder = new PdfFormXObject(new Rectangle(0, 0, side, side));
-        }
 
         public virtual void HandleEvent(Event @event)
         {
             PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
-            PdfDocument pdf = docEvent.GetDocument();
             PdfPage page = docEvent.GetPage();
-            int pageNumber = pdf.GetPageNumber(page);
             Rectangle pageSize = page.GetPageSize();
 
             // Creates drawing canvas
             PdfCanvas pdfCanvas = new PdfCanvas(page);
             Canvas canvas = new Canvas(pdfCanvas, pageSize);
-
+            canvas.SetFontSize(8);
             Paragraph p = new Paragraph()
-                .Add("Page ")
-                .Add(pageNumber.ToString())
-                .Add(" of");
+                .Add("Komunikat klasyfikacyjny {tournament.name} {tournament.date}\n")
+                .Add("Przewodniczący Komisji RTS: {referee.Name} {referee.Surname}, sędzia kl. {referee.Class}");
 
-            canvas.ShowTextAligned(p, x, y, TextAlignment.RIGHT);
-            canvas.Close();
-
-            // Create placeholder object to write number of pages
-            pdfCanvas.AddXObjectAt(placeholder, x + space, y - descent);
-            pdfCanvas.Release();
-        }
-
-        public void WriteTotal(PdfDocument pdf)
-        {
-            Canvas canvas = new Canvas(placeholder, pdf);
-            canvas.ShowTextAligned(pdf.GetNumberOfPages().ToString(),
-                0, descent, TextAlignment.LEFT);
+            canvas.ShowTextAligned(p, x, y, TextAlignment.LEFT);
             canvas.Close();
         }
     }
