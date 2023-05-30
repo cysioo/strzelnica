@@ -2,8 +2,27 @@
 <html>
 <head>
     <style>
-        body {
+        @page {
+            margin: 50pt 50pt 65pt 50pt;
         }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: yellow;
+        }
+
 
         .organizer {
         }
@@ -83,9 +102,9 @@
         <table>
             <tr>
                 <th>Lp.</th>
-                <td>Funkcje sędziowskie</td>
-                <td>Imię i nazwisko</td>
-                <td>Klasa sędziowska</td>
+                <th>Funkcje sędziowskie</th>
+                <th>Imię i nazwisko</th>
+                <th>Klasa sędziowska</th>
             </tr>
             <!--[[referee-rows]]-->
         </table>

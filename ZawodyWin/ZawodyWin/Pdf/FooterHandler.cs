@@ -12,8 +12,8 @@ namespace ZawodyWin.Pdf
 {
     public class FooterHandler : IEventHandler
     {
-        protected float x = 40;
-        protected float y = 25;
+        protected float x = 50;
+        protected float y = 45;
 
         public FooterHandler(FooterModel model)
         {

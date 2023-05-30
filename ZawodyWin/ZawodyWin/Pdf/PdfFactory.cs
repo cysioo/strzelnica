@@ -1,5 +1,6 @@
 ﻿using iText.Html2pdf;
 using iText.Kernel.Events;
+using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using System.IO;
 using System.Linq;

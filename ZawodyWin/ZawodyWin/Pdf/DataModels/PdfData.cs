@@ -73,7 +73,7 @@ namespace ZawodyWin.Pdf.DataModels
                 var seriesHeaderCells = new StringBuilder();
                 for (var round = 1; round <= competition.NumberOfRounds; round++)
                 {
-                    seriesHeaderCells.AppendFormat("<td>Seria {0}</td>", round);
+                    seriesHeaderCells.AppendFormat("<th>Seria {0}</th>", round);
                 }
                 protocol.SeriesHeaderCells = seriesHeaderCells.ToString();
 
