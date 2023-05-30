@@ -32,11 +32,36 @@ namespace ZawodyWin.Pdf
             _shootingClubRepository = new ShootingClubRepository();
         }
 
-        public void CreateTournamentPdf(Tournament tournament)
+        public string CreateTournamentPdf(Tournament tournament)
         {
             var data = GetPdfData(tournament);
             var html = CreateTournamentHtml(data);
-            CreatePdf(html, data.FooterModel, "C:\\temp\\strzelnica\\wyniki.pdf");
+            string fullPath = PrepareTournamentPdfFilePath(tournament);
+            CreatePdf(html, data.FooterModel, fullPath);
+            return fullPath;
+        }
+
+        private static string PrepareTournamentPdfFilePath(Tournament tournament)
+        {
+            if (!Directory.Exists(Settings.TempFolder))
+            {
+                Directory.CreateDirectory(Settings.TempFolder);
+            }
+            StringBuilder fileName = CreateFileName(tournament);
+            var fullPath = $"{Settings.TempFolder}\\{fileName}";
+            return fullPath;
+        }
+
+        private static StringBuilder CreateFileName(Tournament tournament)
+        {
+            var fileName = new StringBuilder(tournament.Name);
+            fileName.Append(tournament.Date.Value.ToString("-yyyy-MM-dd"));
+            foreach (char c in Path.GetInvalidFileNameChars())
+            {
+                fileName = fileName.Replace(c, '_');
+            }
+            fileName.Append(".pdf");
+            return fileName;
         }
 
         private PdfData GetPdfData(Tournament tournament)

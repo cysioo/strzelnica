@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using ZawodyWin.DataModels;
@@ -71,8 +72,13 @@ namespace ZawodyWin.Pages
         private void btnPdf_Click(object sender, RoutedEventArgs e)
         {
             var pdfFactory = new PdfFactory();
-            pdfFactory.CreateTournamentPdf(_tournament);
-            MessageBox.Show("Pfd gotowy");
+            var pdfPath = pdfFactory.CreateTournamentPdf(_tournament);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = Path.GetExtension(pdfPath);
+            saveFileDialog.Title = "Wyniki zawodów";
+            saveFileDialog.FileName = Path.GetFileName(pdfPath);
+            if (saveFileDialog.ShowDialog() == true)
+                File.Copy(pdfPath, saveFileDialog.FileName);
         }
     }
 }
