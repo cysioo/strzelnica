@@ -77,6 +77,7 @@ namespace ZawodyWin.Pages
             saveFileDialog.DefaultExt = Path.GetExtension(pdfPath);
             saveFileDialog.Title = "Wyniki zawodów";
             saveFileDialog.FileName = Path.GetFileName(pdfPath);
+            saveFileDialog.Filter = "PDF (.pdf)|*.pdf|All files|*";
             if (saveFileDialog.ShowDialog() == true)
                 File.Copy(pdfPath, saveFileDialog.FileName);
         }
