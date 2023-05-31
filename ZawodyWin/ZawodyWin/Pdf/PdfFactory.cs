@@ -5,6 +5,7 @@ using iText.Kernel.Pdf;
 using System.IO;
 using System.Linq;
 using System.Text;
+using ZawodyWin.Common;
 using ZawodyWin.DataModels;
 using ZawodyWin.Pdf.DataModels;
 using ZawodyWin.Repositories;
@@ -43,25 +44,8 @@ namespace ZawodyWin.Pdf
 
         private static string PrepareTournamentPdfFilePath(Tournament tournament)
         {
-            if (!Directory.Exists(Settings.TempFolder))
-            {
-                Directory.CreateDirectory(Settings.TempFolder);
-            }
-            StringBuilder fileName = CreateFileName(tournament);
-            var fullPath = $"{Settings.TempFolder}\\{fileName}";
-            return fullPath;
-        }
-
-        private static StringBuilder CreateFileName(Tournament tournament)
-        {
-            var fileName = new StringBuilder(tournament.Name);
-            fileName.Append(tournament.Date.Value.ToString("-yyyy-MM-dd"));
-            foreach (char c in Path.GetInvalidFileNameChars())
-            {
-                fileName = fileName.Replace(c, '_');
-            }
-            fileName.Append(".pdf");
-            return fileName;
+            var fileName = $"{tournament.Name}-{tournament.Date.Value.ToString("yyyy-MM-dd")}";
+            return FileOperations.PrepareFilePath(Settings.TempFolder, fileName, "pdf");
         }
 
         private PdfData GetPdfData(Tournament tournament)

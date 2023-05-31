@@ -4,5 +4,6 @@
     {
         internal static string ConnectionString => "Data Source=DB/TournamentDB.db;";
         internal static string TempFolder => "temp";
+        internal static string ImagesFolder => "images";
     }
 }

@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -29,7 +30,13 @@
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AddressLine1}"/>
         <Label Grid.Row="4" Grid.Column="0" Content="Addres (linia 2):"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding AddressLine2}"/>
-        <Label Grid.Row="5" Grid.Column="0" Content="Logo Path:"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LogoPath}"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Logo:"/>
+        <DockPanel Grid.Row="5" Grid.Column="1">
+            <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Left" >
+                <Button x:Name="btnPickLogoFile" Click="btnPickLogoFile_Click">Wybierz plik</Button>
+            </WrapPanel>
+            <TextBox x:Name="tbxLogoPath" Text="{Binding LogoPathToUpload}"/>
+        </DockPanel>
+        <Image Grid.Row="6" Grid.Column="1" x:Name="imageLogo" Source="{Binding LogoPathExisting}"/>
     </Grid>
 </UserControl>

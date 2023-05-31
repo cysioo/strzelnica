@@ -12,6 +12,7 @@ namespace ZawodyWin.ViewModels
         private string? _addressLine1;
         private string? _addressLine2;
         private string? _logoPath;
+        private string? _logoPathToUpload;
 
         public string Name
         {
@@ -43,10 +44,16 @@ namespace ZawodyWin.ViewModels
             set { _addressLine2 = value; OnPropertyChanged(nameof(AddressLine2)); }
         }
 
-        public string? LogoPath
+        public string? LogoPathExisting
         {
             get { return _logoPath; }
-            set { _logoPath = value; OnPropertyChanged(nameof(LogoPath)); }
+            set { _logoPath = value; OnPropertyChanged(nameof(LogoPathExisting)); }
+        }
+
+        public string? LogoPathToUpload
+        {
+            get { return _logoPathToUpload; }
+            set { _logoPathToUpload = value; OnPropertyChanged(nameof(LogoPathToUpload)); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -65,7 +72,7 @@ namespace ZawodyWin.ViewModels
                 License = License,
                 AddressLine1 = AddressLine1,
                 AddressLine2 = AddressLine2,
-                LogoPath = LogoPath
+                LogoPath = LogoPathExisting
             };
         }
 

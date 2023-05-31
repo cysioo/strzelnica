@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZawodyWin.Common;
 using ZawodyWin.DataModels;
-using ZawodyWin.FormControls;
 using ZawodyWin.Repositories;
 using ZawodyWin.ViewModels;
 
@@ -40,6 +29,14 @@ namespace ZawodyWin.Pages
         {
             var shootingClub = shootingClubEditor.ShootingClub.ToDbModel();
             shootingClub.Id = _shootingClubId;
+            if (shootingClubEditor.ShootingClub.LogoPathToUpload != null)
+            {
+                var fileName = $"logo-club-{_shootingClubId}";
+                var extension = System.IO.Path.GetExtension(shootingClubEditor.ShootingClub.LogoPathToUpload);
+                var path = FileOperations.PrepareFilePath(Settings.ImagesFolder, fileName, extension);
+                System.IO.File.Copy(shootingClubEditor.ShootingClub.LogoPathToUpload, path);
+                shootingClub.LogoPath = path;
+            }
             var updateSucceeded = _shootingClubRepository.Update(shootingClub);
             if (updateSucceeded) { MessageBox.Show("Klub zapisany."); }
         }
