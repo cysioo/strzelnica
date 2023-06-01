@@ -34,6 +34,11 @@ namespace ZawodyWin.Pages
                 var fileName = $"logo-club-{_shootingClubId}";
                 var extension = System.IO.Path.GetExtension(shootingClubEditor.ShootingClub.LogoPathToUpload);
                 var path = FileOperations.PrepareFilePath(Settings.ImagesFolder, fileName, extension);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
                 System.IO.File.Copy(shootingClubEditor.ShootingClub.LogoPathToUpload, path);
                 shootingClub.LogoPath = path;
             }

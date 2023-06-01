@@ -12,7 +12,7 @@ namespace ZawodyWin.Common
                 Directory.CreateDirectory(folder);
             }
             StringBuilder fileName = CreateValidFileName(baseFileName);
-            var fullPath = $"{folder}\\{fileName}.{extension}";
+            var fullPath = $"{folder}\\{fileName}.{extension.TrimStart('.')}";
             return fullPath;
         }
 

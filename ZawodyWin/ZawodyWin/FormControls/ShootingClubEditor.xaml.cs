@@ -1,5 +1,8 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using ZawodyWin.ViewModels;
 
 namespace ZawodyWin.FormControls
@@ -23,7 +26,20 @@ namespace ZawodyWin.FormControls
         public ShootingClubViewModel ShootingClub
         {
             get { return (ShootingClubViewModel)DataContext; }
-            set { DataContext = value; }
+            set { DataContext = value; value.PropertyChanged += ViewModel_PropertyChanged; }
+        }
+
+        private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ShootingClubViewModel.LogoPathExisting))
+            {
+                var viewModel = sender as ShootingClubViewModel;
+                if (!string.IsNullOrEmpty(viewModel.LogoPathExisting))
+                {
+                    var absoluteUri = new Uri(new Uri(System.AppDomain.CurrentDomain.BaseDirectory, UriKind.Absolute), new Uri(viewModel.LogoPathExisting, UriKind.Relative));
+                    imageLogo.Source = new BitmapImage(absoluteUri);
+                }
+            }
         }
 
         private void btnPickLogoFile_Click(object sender, System.Windows.RoutedEventArgs e)

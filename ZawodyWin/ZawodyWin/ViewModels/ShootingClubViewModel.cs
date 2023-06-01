@@ -83,7 +83,7 @@ namespace ZawodyWin.ViewModels
             _license = tournament.License;
             _addressLine1 = tournament.AddressLine1;
             _addressLine2 = tournament.AddressLine2;
-            _logoPath = tournament.LogoPath;
+            LogoPathExisting = tournament.LogoPath;
         }
     }
 }

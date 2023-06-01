@@ -37,6 +37,7 @@
             </WrapPanel>
             <TextBox x:Name="tbxLogoPath" Text="{Binding LogoPathToUpload}"/>
         </DockPanel>
-        <Image Grid.Row="6" Grid.Column="1" x:Name="imageLogo" Source="{Binding LogoPathExisting}"/>
+        <Image Grid.Row="6" Grid.Column="1" x:Name="imageLogo" Height="100" >
+        </Image>
     </Grid>
 </UserControl>
