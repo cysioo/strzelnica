@@ -36,11 +36,13 @@ namespace ZawodyWin.Pages
                 var path = FileOperations.PrepareFilePath(Settings.ImagesFolder, fileName, extension);
                 if (System.IO.File.Exists(path))
                 {
+                    shootingClub.LogoPath = null;
                     System.IO.File.Delete(path);
                 }
 
                 System.IO.File.Copy(shootingClubEditor.ShootingClub.LogoPathToUpload, path);
                 shootingClub.LogoPath = path;
+                shootingClubEditor.ShootingClub.LogoPathExisting = path;
             }
             var updateSucceeded = _shootingClubRepository.Update(shootingClub);
             if (updateSucceeded) { MessageBox.Show("Klub zapisany."); }

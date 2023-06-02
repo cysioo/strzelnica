@@ -37,7 +37,16 @@ namespace ZawodyWin.FormControls
                 if (!string.IsNullOrEmpty(viewModel.LogoPathExisting))
                 {
                     var absoluteUri = new Uri(new Uri(System.AppDomain.CurrentDomain.BaseDirectory, UriKind.Absolute), new Uri(viewModel.LogoPathExisting, UriKind.Relative));
-                    imageLogo.Source = new BitmapImage(absoluteUri);
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = absoluteUri;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    imageLogo.Source = bitmap;
+                }
+                else
+                {
+                    imageLogo.Source = null;
                 }
             }
         }
