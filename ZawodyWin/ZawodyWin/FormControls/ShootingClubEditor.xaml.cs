@@ -54,6 +54,7 @@ namespace ZawodyWin.FormControls
         private void btnPickLogoFile_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff|Wmf Image (.wmf)|*.wmf|All |*";
             if (openFileDialog.ShowDialog() == true)
             {
                 ShootingClub.LogoPathToUpload = openFileDialog.FileName;
