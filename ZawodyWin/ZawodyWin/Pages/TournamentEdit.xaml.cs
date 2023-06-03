@@ -79,7 +79,10 @@ namespace ZawodyWin.Pages
             saveFileDialog.FileName = Path.GetFileName(pdfPath);
             saveFileDialog.Filter = "PDF (.pdf)|*.pdf|All files|*";
             if (saveFileDialog.ShowDialog() == true)
-                File.Copy(pdfPath, saveFileDialog.FileName);
+            {
+
+                File.Copy(pdfPath, saveFileDialog.FileName, true);
+            }
         }
     }
 }
